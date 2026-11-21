@@ -3145,6 +3145,7 @@
 
 	funnel_ddr_ch_0_2: funnel@10d32000 {
 		compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d32000 0x0 0x1000>;
 		reg-names = "funnel-base";
 
@@ -3174,6 +3175,7 @@
 
 	funnel_ddr_ch_1_3: funnel@10d42000 {
 		compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d42000 0x0 0x1000>;
 		reg-names = "funnel-base";
 
@@ -3203,6 +3205,7 @@
 
 	funnel_ddr_ch_4_6: funnel@10d52000 {
 		compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d52000 0x0 0x1000>;
 		reg-names = "funnel-base";
 
@@ -3232,6 +3235,7 @@
 
 	funnel_ddr_ch_5_7: funnel@10d62000 {
 		compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d62000 0x0 0x1000>;
 		reg-names = "funnel-base";
 
@@ -3261,6 +3265,7 @@
 
 	tpdm_ddr_llcc0: tpdm@10d08000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d08000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <32>;
@@ -3281,6 +3286,7 @@
 
 	tpdm_ddr_llcc1: tpdm@10d09000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d09000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <32>;
@@ -3301,6 +3307,7 @@
 
 	tpdm_ddr_llcc2: tpdm@10d0a000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d0a000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <32>;
@@ -3321,6 +3328,7 @@
 
 	tpdm_ddr_llcc3: tpdm@10d0b000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d0b000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <32>;
@@ -3341,6 +3349,7 @@
 
 	tpdm_ddr_llcc4: tpdm@10d0c000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d0c000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <32>;
@@ -3361,6 +3370,7 @@
 
 	tpdm_ddr_llcc5: tpdm@10d0d000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d0d000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <32>;
@@ -3381,6 +3391,7 @@
 
 	tpdm_ddr_llcc6: tpdm@10d0e000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d0e000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <32>;
@@ -3401,6 +3412,7 @@
 
 	tpdm_ddr_llcc7: tpdm@10d0f000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d0f000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <32>;
@@ -3510,6 +3522,7 @@
 
 	tpdm_ddr_ch_0_2: tpdm@10d30000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d30000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,dsb-element-bits = <32>;
@@ -3532,6 +3545,7 @@
 
 	tpdm_ddr_ch_1_3: tpdm@10d40000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d40000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,dsb-element-bits = <32>;
@@ -3553,6 +3567,7 @@
 
 	tpdm_ddr_ch_4_6: tpdm@10d50000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d50000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,dsb-element-bits = <32>;
@@ -3575,6 +3590,7 @@
 
 	tpdm_ddr_ch_5_7: tpdm@10d60000 {
 		compatible = "qcom,coresight-tpdm", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d60000 0x0 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,dsb-element-bits = <32>;
@@ -3675,6 +3691,7 @@
 
 	funnel_ddr_dl1: funnel@10d13000 {
 		compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d13000 0x0 0x1000>;
 		reg-names = "funnel-base";
 
@@ -3724,6 +3741,7 @@
 
 	funnel_ddr_dl0: funnel@10d04000 {
 		compatible = "arm,coresight-dynamic-funnel", "arm,primecell";
+		status = "disabled";
 		reg = <0x0 0x10d04000 0x0 0x1000>;
 		reg-names = "funnel-base";
 
@@ -3805,6 +3823,7 @@
 
 	ddr_replicator {
 		compatible = "arm,coresight-static-replicator";
+		status = "disabled";
 
 		device-name = "replicator_ddr";
 
@@ -3970,6 +3989,7 @@
 
 	funnel-ddr {
 		compatible = "arm,coresight-static-funnel";
+		status = "disabled";
 		device-name = "funnel_ddr";
 
 		out-ports {
@@ -4069,6 +4089,7 @@
 
 	tpdm_ddr_lpicc: tpdm@10b20000 {
 		compatible = "arm,coresight-dummy-source";
+		status = "disabled";
 		device-name = "tpdm_ddr_lpi";
 		trace-name = "tpda_ddr_lpi";
 
@@ -4087,6 +4108,7 @@
 
 	funnel_ddr_lpi: funnel@10b24000 {
 		compatible = "arm,coresight-static-funnel";
+		status = "disabled";
 		device-name = "funnel_ddr_lpi";
 
 		in-ports {
@@ -5937,6 +5959,7 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
+		status = "disabled";
 	};
 
 	cti@10d03000 {
@@ -5949,6 +5972,7 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
+		status = "disabled";
 	};
 
 	cti@10d10000 {
@@ -5961,6 +5985,7 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
+		status = "disabled";
 	};
 
 	cti@10d11000 {
@@ -5973,6 +5998,7 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
+		status = "disabled";
 	};
 
 	cti@10d21000 {
@@ -5998,6 +6024,7 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
+		status = "disabled";
 	};
 
 	cti@10d41000 {
@@ -6010,6 +6037,7 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
+		status = "disabled";
 	};
 
 	cti@10d51000 {
@@ -6022,6 +6050,7 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
+		status = "disabled";
 	};
 
 	cti@10d61000 {
@@ -6034,6 +6063,7 @@
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
 		qcom,extended_cti;
+		status = "disabled";
 	};
 
 	cti@12100000 {

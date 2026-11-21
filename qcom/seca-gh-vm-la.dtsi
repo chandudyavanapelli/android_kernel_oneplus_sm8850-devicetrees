@@ -16,8 +16,8 @@
 	interrupt-parent = <&intc>;
 
 	chosen {
-		bootargs = "console=hvc0 root=/dev/ram rw rootwait nokaslr log_buf_len=1M ufshcd-core.use_mcq_mode=n kpti=0 loglevel=8 printk.devkmsg=on maxcpus=6 driver_async_probe=arm-scmi fw_devlink.strict=1 iommu.strict=0";
-		bootconfig = "androidboot.fstab_suffix=hgy.seca.qcom";
+		bootargs = "console=hvc0 root=/dev/ram rw rootwait nokaslr log_buf_len=1M ufshcd-core.use_mcq_mode=n kpti=0 loglevel=8 printk.devkmsg=on maxcpus=8 driver_async_probe=arm-scmi fw_devlink.strict=1 iommu.strict=0";
+		bootconfig = "androidboot.fstab_suffix=hgy.seca.qcom","androidboot.dtbo_idx=34";
 	};
 
 	reserved_memory: reserved-memory {
@@ -145,36 +145,90 @@
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
-		CPU2: cpu@200 {
+		CPU2: cpu@10000 {
 			compatible = "arm,armv8";
-			reg = <0x0 0x200>;
+			reg = <0x0 0x10000>;
 			device_type = "cpu";
 			enable-method = "psci";
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
-		CPU3: cpu@300 {
+		CPU3: cpu@10100 {
 			compatible = "arm,armv8";
-			reg = <0x0 0x300>;
+			reg = <0x0 0x10100>;
 			device_type = "cpu";
 			enable-method = "psci";
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
-		CPU4: cpu@400 {
+		CPU4: cpu@10200 {
 			compatible = "arm,armv8";
-			reg = <0x0 0x400>;
+			reg = <0x0 0x10200>;
 			device_type = "cpu";
 			enable-method = "psci";
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
-		CPU5: cpu@500 {
+		CPU5: cpu@10300 {
 			compatible = "arm,armv8";
-			reg = <0x0 0x500>;
+			reg = <0x0 0x10300>;
 			device_type = "cpu";
 			enable-method = "psci";
 			cpu-idle-states = <&CPU_PWR_DWN>;
+		};
+
+		CPU6: cpu@10400 {
+			compatible = "arm,armv8";
+			reg = <0x0 0x10400>;
+			device_type = "cpu";
+			enable-method = "psci";
+			cpu-idle-states = <&CPU_PWR_DWN>;
+		};
+
+		CPU7: cpu@10500 {
+			compatible = "arm,armv8";
+			reg = <0x0 0x10500>;
+			device_type = "cpu";
+			enable-method = "psci";
+			cpu-idle-states = <&CPU_PWR_DWN>;
+		};
+
+		cpu-map {
+			cluster0 {
+				core0 {
+					cpu = <&CPU0>;
+				};
+
+				core1 {
+					cpu = <&CPU1>;
+				};
+			};
+
+			cluster1 {
+				core0 {
+					cpu = <&CPU2>;
+				};
+
+				core1 {
+					cpu = <&CPU3>;
+				};
+
+				core2 {
+					cpu = <&CPU4>;
+				};
+
+				core3 {
+					cpu = <&CPU5>;
+				};
+
+				core4 {
+					cpu = <&CPU6>;
+				};
+
+				core5 {
+					cpu = <&CPU7>;
+				};
+			};
 		};
 	};
 
@@ -1232,6 +1286,23 @@
 				};
 			};
 
+			/* Compressched virtio */
+			virtio-mmio@52 {
+				vdevice-type = "virtio-mmio";
+				generate = "/virtio-mmio";
+				peer-default;
+				vqs-num = <0x2>;
+				push-compatible = "virtio,mmio";
+				sync-reset;
+				dma-coherent;
+				dma_base = <0x0 0x308000>;
+				memory {
+					qcom,label = <0x55>;
+					#address-cells = <0x2>;
+					allocate-base;
+				};
+			};
+
 			vsmmu@15a00000 {
 				vdevice-type = "vsmmu-v2";
 				smmu-handle = <0x15a00000>;
@@ -1475,6 +1546,14 @@
 			compatible = "qcom,msm-imem-diag-dload";
 			reg = <0xc8 0xc8>;
 		};
+	};
+
+	tsc@1c81000 {
+		compatible = "qcom,tsc-vm";
+		reg = <0x1c81000 0x1000>;
+		reg-names = "tsc";
+		qcom,tsc-nsec-update;
+		status = "okay";
 	};
 
 	qcom,mpm2-sleep-counter@c221000 {
@@ -1890,7 +1969,7 @@
 					"dtbo_a", "dsp_b", "dsp_a",
 					"vendor_boot_b", "vendor_boot_a",
 					"init_boot_b", "init_boot_a", "devinfo",
-					"bootloader_b", "bootloader_a";
+					"vm-bootloader_b", "vm-bootloader_a";
 		};
 	};
 };

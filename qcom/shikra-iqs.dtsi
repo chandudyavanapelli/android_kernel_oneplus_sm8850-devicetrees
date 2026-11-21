@@ -15,3 +15,11 @@
 	compatible = "qcom,shikra-iqs";
 	qcom,msm-id = <759 0x10000>;
 };
+
+&qcom_dma_heaps {
+	qcom,audio {
+		qcom,dma-heap-name = "qcom,audio";
+		qcom,dma-heap-type = <HEAP_TYPE_CARVEOUT>;
+		memory-region = <&audio_mdsp_carveout_mem>;
+	};
+};

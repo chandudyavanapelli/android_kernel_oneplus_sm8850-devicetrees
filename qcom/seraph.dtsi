@@ -1314,7 +1314,7 @@
 	};
 
 	cpuss-sleep-stats@17800054 {
-		compatible = "qcom,cpuss-sleep-stats-v4";
+		compatible = "qcom,cpuss-sleep-stats-v5";
 		reg = <0x17800054 0x4>, <0x17810054 0x4>, <0x17820054 0x4>,
 		      <0x17830054 0x4>, <0x17840054 0x4>, <0x17880098 0x4>,
 		      <0x178c0000 0x10000>;
@@ -1886,7 +1886,7 @@
 		interrupt-controller;
 		#interrupt-cells = <2>;
 		wakeup-parent = <&pdc>;
-		qcom,gpios-reserved = <18 19>;
+		qcom,gpios-reserved = <18 19 28>;
 	};
 
 	pcie_crm_hw_0_bcm_voter: bcm_voter@0 {
@@ -2297,6 +2297,38 @@
 			#address-cells = <2>;
 			#size-cells = <0>;
 			qcom,can-sleep;
+		};
+	};
+
+	qcom,pdr_monitor {
+		compatible = "qcom,pdr-monitor";
+
+		pd-adsp-audio {
+			service-name = "tms/servreg";
+			service-path = "msm/adsp/audio_pd";
+			qcom,smem-id = <684>;
+			qcom,smem-host = <2>;
+		};
+
+		pd-adsp-sensor {
+			service-name = "tms/servreg";
+			service-path = "msm/adsp/sensor_pd";
+			qcom,smem-id = <685>;
+			qcom,smem-host = <2>;
+		};
+
+		pd-adsp-xr {
+			service-name = "tms/servreg";
+			service-path = "msm/adsp/xr_pd";
+			qcom,smem-id = <687>;
+			qcom,smem-host = <2>;
+		};
+
+		pd-adsp-ois {
+			service-name = "tms/servreg";
+			service-path = "msm/adsp/ois_pd";
+			qcom,smem-id = <686>;
+			qcom,smem-host = <2>;
 		};
 	};
 

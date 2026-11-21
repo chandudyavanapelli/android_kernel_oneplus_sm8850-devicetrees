@@ -760,6 +760,117 @@
 		};
 	};
 
+	qupv3_se5_i2c_pins: qupv3_se5_i2c_pins {
+		qupv3_se5_i2c_sda_active: qupv3_se5_i2c_sda_active {
+			mux {
+				pins = "gpio72";
+				function = "qup1_se5_l0_mira";
+			};
+
+			config {
+				pins = "gpio72";
+				drive-strength = <2>;
+				bias-pull-up;
+				qcom,i2c_pull;
+			};
+		};
+
+		qupv3_se5_i2c_scl_active: qupv3_se5_i2c_scl_active {
+			mux {
+				pins = "gpio73";
+				function = "qup1_se5_l1_mira";
+			};
+
+			config {
+				pins = "gpio73";
+				drive-strength = <2>;
+				bias-pull-up;
+				qcom,i2c_pull;
+			};
+		};
+
+		qupv3_se5_i2c_sleep: qupv3_se5_i2c_sleep {
+			mux {
+				pins = "gpio72", "gpio73";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio72", "gpio73";
+				drive-strength = <2>;
+			};
+		};
+	};
+
+	qupv3_se5_spi_pins: qupv3_se5_spi_pins {
+		qupv3_se5_spi_miso_active: qupv3_se5_spi_miso_active {
+			mux {
+				pins = "gpio72";
+				function = "qup1_se5_l0_mira";
+			};
+
+			config {
+				pins = "gpio72";
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		qupv3_se5_spi_mosi_active: qupv3_se5_spi_mosi_active {
+			mux {
+				pins = "gpio73";
+				function = "qup1_se5_l1_mira";
+			};
+
+			config {
+				pins = "gpio73";
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		qupv3_se5_spi_clk_active: qupv3_se5_spi_clk_active {
+			mux {
+				pins = "gpio74";
+				function = "qup1_se5_l2_mira";
+			};
+
+			config {
+				pins = "gpio74";
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		qupv3_se5_spi_cs_active: qupv3_se5_spi_cs_active {
+			mux {
+				pins = "gpio75";
+				function = "qup1_se5_l3_mira";
+			};
+
+			config {
+				pins = "gpio75";
+				drive-strength = <6>;
+				bias-disable;
+			};
+		};
+
+		qupv3_se5_spi_sleep: qupv3_se5_spi_sleep {
+			mux {
+				pins = "gpio72", "gpio73",
+					"gpio74", "gpio75";
+				function = "gpio";
+			};
+
+			config {
+				pins = "gpio72", "gpio73",
+					"gpio74", "gpio75";
+				drive-strength = <2>;
+				bias-disable;
+			};
+		};
+	};
+
 	qupv3_se6_i2c_pins: qupv3_se6_i2c_pins {
 		qupv3_se6_i2c_sda_active: qupv3_se6_i2c_sda_active {
 			mux {

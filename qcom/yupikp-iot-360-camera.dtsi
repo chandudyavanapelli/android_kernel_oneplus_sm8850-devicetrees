@@ -303,6 +303,165 @@
 		interrupts = <54 0>;
 		irq-gpio = <&tlmm 54 GPIO_ACTIVE_LOW>;
 	};
+
+	aw20072_led@3a {
+		compatible = "awinic,aw20072";
+		status = "ok";
+		reg = <0x3a>;
+		enable-gpios = <&tlmm 53 GPIO_ACTIVE_HIGH>;
+
+		/* Board-level defaults (whole ring), handled by leds-aw200xx.c */
+		awinic,boot-mode = "solid";        /* off | solid | breath */
+		awinic,boot-color = "blue";       /* white | red | green | blue */
+		awinic,boot-brightness = <255>;    /* 0..255 */
+		/* Optional for breath mode */
+		awinic,breath-interval-ms = <20>;  /* default 20 */
+		awinic,breath-step = <5>;          /* default 5 */
+
+		led@0  { reg = <0>;  label = "aw20072:led0";  led-max-microamp = <20000>; };
+
+		led@1  { reg = <1>;  label = "aw20072:led1";  led-max-microamp = <20000>; };
+
+		led@2  { reg = <2>;  label = "aw20072:led2";  led-max-microamp = <20000>; };
+
+		led@3  { reg = <3>;  label = "aw20072:led3";  led-max-microamp = <20000>; };
+
+		led@4  { reg = <4>;  label = "aw20072:led4";  led-max-microamp = <20000>; };
+
+		led@5  { reg = <5>;  label = "aw20072:led5";  led-max-microamp = <20000>; };
+
+		led@6  { reg = <6>;  label = "aw20072:led6";  led-max-microamp = <20000>; };
+
+		led@7  { reg = <7>;  label = "aw20072:led7";  led-max-microamp = <20000>; };
+
+		led@8  { reg = <8>;  label = "aw20072:led8";  led-max-microamp = <20000>; };
+
+		led@9  { reg = <9>;  label = "aw20072:led9";  led-max-microamp = <20000>; };
+
+		led@10 { reg = <10>; label = "aw20072:led10"; led-max-microamp = <20000>; };
+
+		led@11 { reg = <11>; label = "aw20072:led11"; led-max-microamp = <20000>; };
+
+		led@12 { reg = <12>; label = "aw20072:led12"; led-max-microamp = <20000>; };
+
+		led@13 { reg = <13>; label = "aw20072:led13"; led-max-microamp = <20000>; };
+
+		led@14 { reg = <14>; label = "aw20072:led14"; led-max-microamp = <20000>; };
+
+		led@15 { reg = <15>; label = "aw20072:led15"; led-max-microamp = <20000>; };
+
+		led@16 { reg = <16>; label = "aw20072:led16"; led-max-microamp = <20000>; };
+
+		led@17 { reg = <17>; label = "aw20072:led17"; led-max-microamp = <20000>; };
+
+		led@18 { reg = <18>; label = "aw20072:led18"; led-max-microamp = <20000>; };
+
+		led@19 { reg = <19>; label = "aw20072:led19"; led-max-microamp = <20000>; };
+
+		led@20 { reg = <20>; label = "aw20072:led20"; led-max-microamp = <20000>; };
+
+		led@21 { reg = <21>; label = "aw20072:led21"; led-max-microamp = <20000>; };
+
+		led@22 { reg = <22>; label = "aw20072:led22"; led-max-microamp = <20000>; };
+
+		led@23 { reg = <23>; label = "aw20072:led23"; led-max-microamp = <20000>; };
+
+		led@24 { reg = <24>; label = "aw20072:led24"; led-max-microamp = <20000>; };
+
+		led@25 { reg = <25>; label = "aw20072:led25"; led-max-microamp = <20000>; };
+
+		led@26 { reg = <26>; label = "aw20072:led26"; led-max-microamp = <20000>; };
+
+		led@27 { reg = <27>; label = "aw20072:led27"; led-max-microamp = <20000>; };
+
+		led@28 { reg = <28>; label = "aw20072:led28"; led-max-microamp = <20000>; };
+
+		led@29 { reg = <29>; label = "aw20072:led29"; led-max-microamp = <20000>; };
+
+		led@30 { reg = <30>; label = "aw20072:led30"; led-max-microamp = <20000>; };
+
+		led@31 { reg = <31>; label = "aw20072:led31"; led-max-microamp = <20000>; };
+
+		led@32 { reg = <32>; label = "aw20072:led32"; led-max-microamp = <20000>; };
+
+		led@33 { reg = <33>; label = "aw20072:led33"; led-max-microamp = <20000>; };
+
+		led@34 { reg = <34>; label = "aw20072:led34"; led-max-microamp = <20000>; };
+
+		led@35 { reg = <35>; label = "aw20072:led35"; led-max-microamp = <20000>; };
+
+		led@36 { reg = <36>; label = "aw20072:led36"; led-max-microamp = <20000>; };
+
+		led@37 { reg = <37>; label = "aw20072:led37"; led-max-microamp = <20000>; };
+
+		led@38 { reg = <38>; label = "aw20072:led38"; led-max-microamp = <20000>; };
+
+		led@39 { reg = <39>; label = "aw20072:led39"; led-max-microamp = <20000>; };
+
+		led@40 { reg = <40>; label = "aw20072:led40"; led-max-microamp = <20000>; };
+
+		led@41 { reg = <41>; label = "aw20072:led41"; led-max-microamp = <20000>; };
+
+		led@42 { reg = <42>; label = "aw20072:led42"; led-max-microamp = <20000>; };
+
+		led@43 { reg = <43>; label = "aw20072:led43"; led-max-microamp = <20000>; };
+
+		led@44 { reg = <44>; label = "aw20072:led44"; led-max-microamp = <20000>; };
+
+		led@45 { reg = <45>; label = "aw20072:led45"; led-max-microamp = <20000>; };
+
+		led@46 { reg = <46>; label = "aw20072:led46"; led-max-microamp = <20000>; };
+
+		led@47 { reg = <47>; label = "aw20072:led47"; led-max-microamp = <20000>; };
+
+		led@48 { reg = <48>; label = "aw20072:led48"; led-max-microamp = <20000>; };
+
+		led@49 { reg = <49>; label = "aw20072:led49"; led-max-microamp = <20000>; };
+
+		led@50 { reg = <50>; label = "aw20072:led50"; led-max-microamp = <20000>; };
+
+		led@51 { reg = <51>; label = "aw20072:led51"; led-max-microamp = <20000>; };
+
+		led@52 { reg = <52>; label = "aw20072:led52"; led-max-microamp = <20000>; };
+
+		led@53 { reg = <53>; label = "aw20072:led53"; led-max-microamp = <20000>; };
+
+		led@54 { reg = <54>; label = "aw20072:led54"; led-max-microamp = <20000>; };
+
+		led@55 { reg = <55>; label = "aw20072:led55"; led-max-microamp = <20000>; };
+
+		led@56 { reg = <56>; label = "aw20072:led56"; led-max-microamp = <20000>; };
+
+		led@57 { reg = <57>; label = "aw20072:led57"; led-max-microamp = <20000>; };
+
+		led@58 { reg = <58>; label = "aw20072:led58"; led-max-microamp = <20000>; };
+
+		led@59 { reg = <59>; label = "aw20072:led59"; led-max-microamp = <20000>; };
+
+		led@60 { reg = <60>; label = "aw20072:led60"; led-max-microamp = <20000>; };
+
+		led@61 { reg = <61>; label = "aw20072:led61"; led-max-microamp = <20000>; };
+
+		led@62 { reg = <62>; label = "aw20072:led62"; led-max-microamp = <20000>; };
+
+		led@63 { reg = <63>; label = "aw20072:led63"; led-max-microamp = <20000>; };
+
+		led@64 { reg = <64>; label = "aw20072:led64"; led-max-microamp = <20000>; };
+
+		led@65 { reg = <65>; label = "aw20072:led65"; led-max-microamp = <20000>; };
+
+		led@66 { reg = <66>; label = "aw20072:led66"; led-max-microamp = <20000>; };
+
+		led@67 { reg = <67>; label = "aw20072:led67"; led-max-microamp = <20000>; };
+
+		led@68 { reg = <68>; label = "aw20072:led68"; led-max-microamp = <20000>; };
+
+		led@69 { reg = <69>; label = "aw20072:led69"; led-max-microamp = <20000>; };
+
+		led@70 { reg = <70>; label = "aw20072:led70"; led-max-microamp = <20000>; };
+
+		led@71 { reg = <71>; label = "aw20072:led71"; led-max-microamp = <20000>; };
+	};
 };
 
 

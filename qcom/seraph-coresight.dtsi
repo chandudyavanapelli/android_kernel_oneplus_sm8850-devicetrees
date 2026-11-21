@@ -3858,7 +3858,7 @@
 		reg = <0x1130a000 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <64>;
-		device-name = "tpdm_swao_prio1";
+		device-name = "tpdm_swao_prio_1";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -3878,7 +3878,7 @@
 		reg = <0x1130b000 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <64>;
-		device-name = "tpdm_swao_prio2";
+		device-name = "tpdm_swao_prio_2";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";
@@ -3898,7 +3898,7 @@
 		reg = <0x1130c000 0x1000>;
 		reg-names = "tpdm-base";
 		qcom,cmb-element-bits = <64>;
-		device-name = "tpdm_swao_prio3";
+		device-name = "tpdm_swao_prio_3";
 
 		clocks = <&aoss_qmp>;
 		clock-names = "apb_pclk";

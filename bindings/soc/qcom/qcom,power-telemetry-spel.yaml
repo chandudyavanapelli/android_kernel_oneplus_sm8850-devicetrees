@@ -1,0 +1,46 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: "http://devicetree.org/schemas/soc/qcom/qcom,power-telemetry-spel.yaml#"
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm Technologies, Inc. Power Telemetry SPEL device
+
+maintainers:
+  - Serge Rudashevsky <serger@qti.qualcomm.com>
+
+description: |
+  Qualcomm Technologies, Inc. Power Telemetry (QPT) SoC
+  Power Estimation and Limiting (SPEL) device provides
+  an interface to the SPEL HW to enable access to the
+  SPEL telemetry data from user-space via sysfs nodes
+  defined by the powercap framework.
+
+properties:
+  compatible:
+    enum:
+      - qcom,glymur-spel
+      - qcom,power-telemetry-spel
+
+  reg:
+    maxItems: 3
+    description:
+      SPEL hardware register regions
+        item1 - SPEL nodes register region
+        item2 - SPEL constraints register region
+        item3 - SPEL configuration register region
+
+required:
+  - compatible
+  - reg
+
+additionalProperties: false
+
+examples:
+  - |
+    qcom,power-telemetry-spel-device@ef3e000 {
+        compatible = "qcom,power-telemetry-spel";
+        reg = <0x0 0xef3e000 0x0 0x1000>,
+              <0x0 0xef3d000 0x0 0x1000>,
+              <0x0 0xef3b000 0x0 0x1000>;
+    };

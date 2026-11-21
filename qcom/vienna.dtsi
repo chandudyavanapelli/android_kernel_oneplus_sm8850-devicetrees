@@ -2418,6 +2418,10 @@
 			compatible = "qcom,altmode-glink";
 			#altmode-cells = <1>;
 		};
+
+		qcom_batt_telemetry: qcom,batt-telemetry {
+			compatible = "qcom,batt-telemetry";
+		};
 	};
 
 	qcom,pmic_glink_log {
@@ -2851,19 +2855,6 @@
 
 &uart6 {
 	status = "ok";
-};
-
-&pmic_glink_debug {
-	spmi@0 {
-		reg = <0>;
-		#address-cells = <2>;
-		#size-cells = <0>;
-		qcom,pmw6100-debug@0 {
-			compatible = "qcom,spmi-pmic";
-			reg = <0 SPMI_USID>;
-			qcom,can-sleep;
-		};
-	};
 };
 
 &usb0 {

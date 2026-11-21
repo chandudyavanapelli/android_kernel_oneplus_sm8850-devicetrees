@@ -359,6 +359,17 @@ properties:
       - qcom,waipio-nsp_noc
       - qcom,waipio-pcie_anoc
       - qcom,waipio-system_noc
+      - qcom,diwali-aggre1_noc
+      - qcom,diwali-aggre2_noc
+      - qcom,diwali-clk_virt
+      - qcom,diwali-config_noc
+      - qcom,diwali-gem_noc
+      - qcom,diwali-lpass_ag_noc
+      - qcom,diwali-mc_virt
+      - qcom,diwali-mmss_noc
+      - qcom,diwali-nsp_noc
+      - qcom,diwali-pcie_anoc
+      - qcom,diwali-system_noc
 
   '#interconnect-cells': true
 

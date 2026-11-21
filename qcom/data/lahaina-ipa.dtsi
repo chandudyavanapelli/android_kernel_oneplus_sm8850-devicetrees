@@ -8,7 +8,7 @@
 	reg =
 			<0x1e00000 0x84000>,
 			<0x1e04000 0x23000>;
-	mboxes = <&qmp_aop 0>;
+	qcom,qmp = <&aoss_qmp>;
 	interrupts =
 			<0 654 IRQ_TYPE_LEVEL_HIGH>,
 			<0 432 IRQ_TYPE_LEVEL_HIGH>;

@@ -30,7 +30,7 @@
 	#size-cells = <2>;
 
 	chosen {
-		bootargs = "android_arch_task_struct_size=512 firmware_class.path=/vendor/firmware_mnt/image pcie_ports=compat irqaffinity=0-5 pcie_aspm=off";
+		bootargs = "android_arch_task_struct_size=512 firmware_class.path=/vendor/firmware_mnt/image pcie_ports=compat irqaffinity=0-5 pcie_aspm=off kvm-arm.ffa-unmap-on-lend kvm-arm.mode=protected kvm-arm.protected_modules=pkvm-geni.ko,pkvm-smc-filter.ko,qcom_smmu_v2_v3_dispatcher.ko,rpmh-regulator.ko,clk-rpmh.ko,gcc-glymur.ko,gpucc-glymur.ko,gxclkctl-kaanapali.ko cpufreq.default_governor=performance iommu.strict=0";
 	};
 
 	aliases: aliases {
@@ -99,6 +99,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
+			#cooling-cells = <2>;
 
 			l2_0: l2-cache {
 				compatible = "cache";
@@ -117,6 +118,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
+			#cooling-cells = <2>;
 		};
 
 		cpu2: cpu@200 {
@@ -129,6 +131,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
+			#cooling-cells = <2>;
 		};
 
 		cpu3: cpu@300 {
@@ -141,6 +144,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
+			#cooling-cells = <2>;
 		};
 
 		cpu4: cpu@400 {
@@ -153,6 +157,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
+			#cooling-cells = <2>;
 		};
 
 		cpu5: cpu@500 {
@@ -165,6 +170,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1024>;
 			dynamic-power-coefficient = <100>;
+			#cooling-cells = <2>;
 		};
 
 		cpu6: cpu@10000 {
@@ -177,6 +183,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 
 			l2_1: l2-cache {
 				compatible = "cache";
@@ -195,6 +202,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu8: cpu@10200 {
@@ -207,6 +215,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu9: cpu@10300 {
@@ -219,6 +228,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu10: cpu@10400 {
@@ -231,6 +241,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu11: cpu@10500 {
@@ -243,6 +254,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu12: cpu@20000 {
@@ -255,6 +267,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 
 			l2_2: l2-cache {
 				compatible = "cache";
@@ -273,6 +286,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu14: cpu@20200 {
@@ -285,6 +299,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu15: cpu@20300 {
@@ -297,6 +312,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu16: cpu@20400 {
@@ -309,6 +325,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu17: cpu@20500 {
@@ -321,6 +338,7 @@
 			power-domain-names = "psci", "perf";
 			capacity-dmips-mhz = <1372>;
 			dynamic-power-coefficient = <266>;
+			#cooling-cells = <2>;
 		};
 
 		cpu-map {
@@ -1261,12 +1279,13 @@
 
 			lanes-per-direction = <2>;
 			clock-names = "ref_clk_src",
-				"ref_aux_clk",
+				"ref_aux_clk", "qref_clk",
 				"rx_sym0_mux_clk", "rx_sym1_mux_clk", "tx_sym0_mux_clk",
 				"rx_sym0_phy_clk", "rx_sym1_phy_clk", "tx_sym0_phy_clk";
 
 			clocks = <&rpmhcc RPMH_CXO_CLK>,
 				<&gcc GCC_UFS_PHY_PHY_AUX_CLK>,
+				<&tcsrcc TCSR_PCIE_4_CLKREF_EN>,
 				<&gcc GCC_UFS_PHY_RX_SYMBOL_0_CLK_SRC>,
 				<&gcc GCC_UFS_PHY_RX_SYMBOL_1_CLK_SRC>,
 				<&gcc GCC_UFS_PHY_TX_SYMBOL_0_CLK_SRC>,
@@ -2115,6 +2134,17 @@
 				qcom,entry-name = "smp2p";
 				#qcom,smem-state-cells = <1>;
 			};
+
+			smp2p_rdbg5_out: qcom,smp2p-rdbg5-out {
+				qcom,entry-name = "rdbg";
+				#qcom,smem-state-cells = <1>;
+			};
+
+			smp2p_rdbg5_in: qcom,smp2p-rdbg5-in {
+				qcom,entry-name = "rdbg";
+				interrupt-controller;
+				#interrupt-cells = <2>;
+			};
 		};
 
 		qcom,smp2p-adsp {
@@ -2159,6 +2189,17 @@
 			smp2p_test2_out: qcom,smp2p-test2-out {
 				qcom,entry-name = "smp2p";
 				#qcom,smem-state-cells = <1>;
+			};
+
+			smp2p_rdbg2_out: qcom,smp2p-rdbg2-out {
+				qcom,entry-name = "rdbg";
+				#qcom,smem-state-cells = <1>;
+			};
+
+			smp2p_rdbg2_in: qcom,smp2p-rdbg2-in {
+				qcom,entry-name = "rdbg";
+				interrupt-controller;
+				#interrupt-cells = <2>;
 			};
 		};
 
@@ -3137,9 +3178,203 @@
 			compatible = "qcom,secure-buffer";
 			qcom,vmid-cp-camera-preview-ro;
 		};
-	};
 
-	msm_gpu: qcom,kgsl-3d0@3d00000 { };
+		msm_gpu: qcom,kgsl-3d0@3d00000 { };
+
+		usb_mp: usb@a4f8800 {
+			compatible = "qcom,glymur-dwc3-mp",
+				     "qcom,dwc3";
+			reg = <0x0 0xa4f8800 0x0 0x400>;
+
+			clocks = <&gcc GCC_CFG_NOC_USB3_MP_AXI_CLK>,
+				 <&gcc GCC_USB30_MP_MASTER_CLK>,
+				 <&gcc GCC_AGGRE_USB3_MP_AXI_CLK>,
+				 <&gcc GCC_USB30_MP_SLEEP_CLK>,
+				 <&gcc GCC_USB30_MP_MOCK_UTMI_CLK>,
+				 <&gcc GCC_CFG_NOC_USB_ANOC_AHB_CLK>,
+				 <&gcc GCC_CFG_NOC_USB_ANOC_SOUTH_AHB_CLK>;
+			clock-names = "cfg_noc",
+				      "core",
+				      "iface",
+				      "sleep",
+				      "mock_utmi",
+				      "cfg_noc_clk",
+				      "noc_aggr_south";
+
+			assigned-clocks = <&gcc GCC_USB30_MP_MOCK_UTMI_CLK>,
+					  <&gcc GCC_USB30_MP_MASTER_CLK>;
+			assigned-clock-rates = <19200000>,
+					       <200000000>;
+
+			interrupts-extended = <&intc GIC_SPI 345 IRQ_TYPE_LEVEL_HIGH>,
+					      <&intc GIC_SPI 346 IRQ_TYPE_LEVEL_HIGH>;
+			interrupt-names = "pwr_event_1",
+					  "pwr_event_2";
+
+			power-domains = <&gcc GCC_USB30_MP_GDSC>;
+
+			resets = <&gcc GCC_USB30_MP_BCR>;
+
+			interconnects = <&aggre3_noc MASTER_USB3_MP &mc_virt SLAVE_EBI1>,
+					<&hsc_noc MASTER_APPSS_PROC &config_noc SLAVE_USB3_MP>;
+			interconnect-names = "usb-ddr",
+					"apps-usb";
+
+			#address-cells = <2>;
+			#size-cells = <2>;
+			ranges;
+
+			status = "disabled";
+
+			usb_mp_dwc3: usb@a400000 {
+				compatible = "snps,dwc3";
+				reg = <0x0 0xa400000 0x0 0xe000>;
+
+				interrupts = <GIC_SPI 132 IRQ_TYPE_LEVEL_HIGH>;
+
+				iommus = <&apps_smmu 0xda0 0x0>;
+				qcom,iommu-dma = "atomic";
+				memory-region = <&dwc3_mp_mem_region>;
+				dma-coherent;
+
+				phys = <&usb_mp_hsphy0>,
+				       <&usb_mp_qmpphy0>,
+				       <&usb_mp_hsphy1>,
+				       <&usb_mp_qmpphy1>;
+				phy-names = "usb2-0",
+					    "usb3-0",
+					    "usb2-1",
+					    "usb3-1";
+
+				dr_mode = "host";
+
+				snps,dis_u2_susphy_quirk;
+				snps,dis_enblslpm_quirk;
+				snps,usb3_lpm_capable;
+				snps,dis-u1-entry-quirk;
+				snps,dis-u2-entry-quirk;
+			};
+		};
+
+		dwc3_mp_mem_region: dwc3_mp_mem_region {
+			iommu-addresses = <&usb_mp_dwc3 0x0 0x0 0x0 0x90000000>,
+					<&usb_mp_dwc3 0x0 0xf0000000 0xffffffff 0x10000000>;
+		};
+
+		usb_mp_hsphy0: phy@fa1000 {
+			compatible = "qcom,glymur-m31-eusb2-phy",
+				     "qcom,m31-eusb2-phy";
+
+			reg = <0x0 0xfa1000 0x0 0x29c>;
+			reg-names = "eusb2_phy_base";
+
+			#phy-cells = <0>;
+
+			vdd-supply = <&L2H_E0>;
+			qcom,vdd-voltage-level = <0 880000 880000>;
+			vdda12-supply = <&L4H_E0>;
+			vdd_refgen-supply = <&L1F_E1>;
+
+			clocks = <&rpmhcc RPMH_CXO_CLK>,
+				 <&tcsrcc TCSR_USB2_1_CLKREF_EN>;
+			clock-names = "ref_clk_src", "ref_clk";
+
+			resets = <&gcc GCC_QUSB2PHY_HS0_MP_BCR>;
+			reset-names = "phy_reset";
+
+			status = "disabled";
+		};
+
+		usb_mp_hsphy1: phy@fa2000  {
+			compatible = "qcom,glymur-m31-eusb2-phy",
+				     "qcom,m31-eusb2-phy";
+
+			reg = <0x0 0xfa2000 0x0 0x29c>;
+			reg-names = "eusb2_phy_base";
+
+			#phy-cells = <0>;
+
+			vdd-supply = <&L2H_E0>;
+			qcom,vdd-voltage-level = <0 880000 880000>;
+			vdda12-supply = <&L4H_E0>;
+			vdd_refgen-supply = <&L1F_E1>;
+
+			clocks = <&rpmhcc RPMH_CXO_CLK>,
+				 <&tcsrcc TCSR_USB2_2_CLKREF_EN>;
+			clock-names = "ref_clk_src", "ref_clk";
+
+			resets = <&gcc GCC_QUSB2PHY_HS1_MP_BCR>;
+			reset-names = "phy_reset";
+
+			status = "disabled";
+		};
+
+		usb_mp_qmpphy0: phy@fa3000 {
+			compatible = "qcom,glymur-qmp-usb3-uni-phy";
+			reg = <0x0 0xfa3000 0x0 0x2000>;
+
+			clocks = <&gcc GCC_USB3_MP_PHY_AUX_CLK>,
+				 <&tcsrcc TCSR_USB3_0_CLKREF_EN>,
+				 <&rpmhcc RPMH_CXO_CLK>,
+				 <&gcc GCC_USB3_MP_PHY_COM_AUX_CLK>,
+				 <&gcc GCC_USB3_MP_PHY_PIPE_0_CLK>;
+			clock-names = "aux",
+				      "clkref",
+				      "ref",
+				      "com_aux",
+				      "pipe";
+
+			resets = <&gcc GCC_USB3_MP_SS0_PHY_BCR>,
+				 <&gcc GCC_USB3UNIPHY_PHY_MP0_BCR>;
+			reset-names = "phy",
+				      "phy_phy";
+
+			power-domains = <&gcc GCC_USB3_MP_SS0_PHY_GDSC>;
+
+			clock-output-names = "usb_mp_phy0_pipe_clk";
+			#clock-cells = <0>;
+
+			#phy-cells = <0>;
+
+			vdda-phy-supply = <&L4H_E0>;
+			vdda-pll-supply = <&L2H_E0>;
+
+			status = "disabled";
+		};
+
+		usb_mp_qmpphy1: phy@fa5000 {
+			compatible = "qcom,glymur-qmp-usb3-uni-phy";
+			reg = <0x0 0xfa5000 0x0 0x2000>;
+
+			clocks = <&gcc GCC_USB3_MP_PHY_AUX_CLK>,
+				 <&tcsrcc TCSR_USB3_1_CLKREF_EN>,
+				 <&rpmhcc RPMH_CXO_CLK>,
+				 <&gcc GCC_USB3_MP_PHY_COM_AUX_CLK>,
+				 <&gcc GCC_USB3_MP_PHY_PIPE_1_CLK>;
+			clock-names = "aux",
+				      "clkref",
+				      "ref",
+				      "com_aux",
+				      "pipe";
+
+			resets = <&gcc GCC_USB3_MP_SS1_PHY_BCR>,
+				 <&gcc GCC_USB3UNIPHY_PHY_MP1_BCR>;
+			reset-names = "phy",
+				      "phy_phy";
+
+			power-domains = <&gcc GCC_USB3_MP_SS1_PHY_GDSC>;
+
+			clock-output-names = "usb_mp_phy1_pipe_clk";
+			#clock-cells = <0>;
+
+			#phy-cells = <0>;
+
+			vdda-phy-supply = <&L4H_E0>;
+			vdda-pll-supply = <&L2H_E0>;
+
+			status = "disabled";
+		};
+	};
 
 	arch_timer: timer {
 		compatible = "arm,armv8-timer";
@@ -3156,6 +3391,8 @@
 #include "msm-arm-smmu-glymur.dtsi"
 #include "mahua-qupv3.dtsi"
 #include "glymur-pcie.dtsi"
+#include "msm-rdbg.dtsi"
+#include "ipcc-test-glymur.dtsi"
 
 &qupv3_se21_2uart {
 	status = "okay";

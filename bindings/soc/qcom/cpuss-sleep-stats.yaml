@@ -23,6 +23,9 @@ properties:
       - qcom,cpuss-sleep-stats
       - qcom,cpuss-sleep-stats-v4
       - qcom,cpuss-sleep-stats-v6
+      - qcom,cpuss-sleep-stats-canoe
+      - qcom,cpuss-sleep-stats-glymur
+      - qcom,cpuss-sleep-stats-alor
 
   reg:
     maxItems: 10

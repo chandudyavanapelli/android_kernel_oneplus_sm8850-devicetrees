@@ -261,7 +261,7 @@
 		compatible = "qcom,rpmh-vrm-regulator";
 		qcom,resource-name = "L1A_E0";
 		qcom,regulator-type = "pmic7-ldo";
-		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_HPM>;
+		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_AUTO>;
 		qcom,mode-threshold-currents = <0 30000>;
 
 		L1A_E0: L1A:
@@ -271,7 +271,7 @@
 			regulator-min-microvolt = <320000>;
 			regulator-max-microvolt = <570000>;
 			qcom,init-voltage = <504000>;
-			qcom,init-mode = <RPMH_REGULATOR_MODE_HPM>;
+			qcom,init-mode = <RPMH_REGULATOR_MODE_AUTO>;
 		};
 	};
 
@@ -279,7 +279,7 @@
 		compatible = "qcom,rpmh-vrm-regulator";
 		qcom,resource-name = "L3A_E0";
 		qcom,regulator-type = "pmic7-ldo";
-		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_HPM>;
+		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_AUTO>;
 		qcom,mode-threshold-currents = <0 30000>;
 
 		L3A_E0: L3A:
@@ -289,7 +289,7 @@
 			regulator-min-microvolt = <1080000>;
 			regulator-max-microvolt = <2000000>;
 			qcom,init-voltage = <1800000>;
-			qcom,init-mode = <RPMH_REGULATOR_MODE_HPM>;
+			qcom,init-mode = <RPMH_REGULATOR_MODE_AUTO>;
 		};
 	};
 
@@ -351,7 +351,7 @@
 		compatible = "qcom,rpmh-vrm-regulator";
 		qcom,resource-name = "L7A_E0";
 		qcom,regulator-type = "pmic7-ldo";
-		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_HPM>;
+		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_AUTO>;
 		qcom,mode-threshold-currents = <0 30000>;
 
 		L7A_E0: L7A:
@@ -361,7 +361,7 @@
 			regulator-min-microvolt = <1010000>;
 			regulator-max-microvolt = <1120000>;
 			qcom,init-voltage = <1080000>;
-			qcom,init-mode = <RPMH_REGULATOR_MODE_HPM>;
+			qcom,init-mode = <RPMH_REGULATOR_MODE_AUTO>;
 		};
 	};
 
@@ -401,7 +401,7 @@
 		compatible = "qcom,rpmh-vrm-regulator";
 		qcom,resource-name = "L11A_E0";
 		qcom,regulator-type = "pmic7-ldo";
-		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_HPM>;
+		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_AUTO>;
 		qcom,mode-threshold-currents = <0 10000>;
 
 		L11A_E0: L11A:
@@ -411,7 +411,7 @@
 			regulator-min-microvolt = <2400000>;
 			regulator-max-microvolt = <3544000>;
 			qcom,init-voltage = <2952000>;
-			qcom,init-mode = <RPMH_REGULATOR_MODE_HPM>;
+			qcom,init-mode = <RPMH_REGULATOR_MODE_AUTO>;
 		};
 	};
 
@@ -455,7 +455,7 @@
 		compatible = "qcom,rpmh-vrm-regulator";
 		qcom,resource-name = "L15A_E0";
 		qcom,regulator-type = "pmic7-ldo";
-		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_HPM>;
+		qcom,supported-modes = <RPMH_REGULATOR_MODE_LPM RPMH_REGULATOR_MODE_AUTO>;
 		qcom,mode-threshold-currents = <0 30000>;
 
 		L15A_E0: L15A:
@@ -465,7 +465,7 @@
 			regulator-min-microvolt = <870000>;
 			regulator-max-microvolt = <970000>;
 			qcom,init-voltage = <904000>;
-			qcom,init-mode = <RPMH_REGULATOR_MODE_HPM>;
+			qcom,init-mode = <RPMH_REGULATOR_MODE_AUTO>;
 		};
 	};
 

@@ -4,12 +4,26 @@
  */
 
 #include "mahua-pmic-overlay.dtsi"
+#include <dt-bindings/pinctrl/qcom,pmic-gpio.h>
+#include "mahua-thermal-overlay.dtsi"
 
 &pmh0101_gpios {
 	nvme_reg_en: nvme-reg-en-state {
 		pins = "gpio14";
 		function = "normal";
 		bias-disable;
+	};
+};
+
+&pmh0110_f_e0_gpios {
+	touch_avdd_default: touch_avdd_default {
+		pins = "gpio6";
+		function = "normal";
+		input-disable;
+		output-enable;
+		bias-disable;
+		power-source = <0>;
+		qcom,drive-strength = <2>;
 	};
 };
 
@@ -26,10 +40,67 @@
 		pinctrl-names = "default";
 		pinctrl-0 = <&nvme_reg_en>;
 	};
+
+	touch_vcc: touch_gpio_regulator@0 {
+		compatible = "qti-regulator-fixed";
+		regulator-name = "touch_vcc";
+		regulator-min-microvolt = <3300000>;
+		regulator-max-microvolt = <3300000>;
+		regulator-enable-ramp-delay = <233>;
+		gpio = <&pmh0110_f_e0_gpios 6 0>;
+		enable-active-high;
+		proxy-supply = <&touch_vcc>;
+		qcom,proxy-consumer-enable;
+		pinctrl-names = "default";
+		pinctrl-0 = <&touch_avdd_default>;
+	};
+
+	regulator_usb3_vbus: regulator-usb3-vbus {
+		compatible = "regulator-fixed";
+		regulator-name = "VREG_USB3_VBUS";
+		gpio = <&pmh0104_l_e1_gpios 6 GPIO_ACTIVE_HIGH>;
+		pinctrl-0 = <&usb3_vbus_en>;
+		pinctrl-names = "default";
+		enable-active-high;
+		regulator-always-on;
+	};
+};
+
+&pmh0104_l_e1_gpios {
+	usb3_vbus_en: usb3-vbus-en-state {
+		pins = "gpio6";
+		function = "normal";
+		qcom,drive-strength = <PMIC_GPIO_STRENGTH_HIGH>;
+		input-disable;
+		output-enable;
+		output-high;
+		power-source = <0>;
+	};
 };
 
 &pcie5 {
 	vreg-3p3-supply = <&nvme_vreg>;
+};
+
+&qupv3_se8_i2c {
+	clock-frequency = <400000>;
+	status = "okay";
+
+	touchscreen@38 {
+		compatible = "hid-over-i2c";
+		reg = <0x38>;
+
+		hid-descr-addr = <0x1>;
+		interrupts-extended = <&tlmm 51 IRQ_TYPE_LEVEL_LOW>;
+		reset-gpios = <&tlmm 48 GPIO_ACTIVE_LOW>;
+		post-power-on-delay-ms = <100>;
+
+		vdd-supply = <&touch_vcc>;
+		vddl-supply = <&L15B>;
+
+		pinctrl-0 = <&ts_int_conn>, <&ts_rst_conn>;
+		pinctrl-names = "default";
+	};
 };
 
 &ucsi {
@@ -89,4 +160,104 @@
 
 &usb_ss0_dwc3_hs {
 	remote-endpoint = <&pmic_glink_hs_in>;
+};
+
+&regulator_ocp_notifier {
+	periph-1c1-supply = <&L1B>;
+	periph-1c2-supply = <&L2B>;
+	periph-1c7-supply = <&L7B>;
+	periph-1c8-supply = <&L8B>;
+	periph-1c9-supply = <&L9B>;
+	periph-1ca-supply = <&L10B>;
+	periph-1cb-supply = <&L11B>;
+	periph-1cc-supply = <&L12B>;
+	periph-1cf-supply = <&L15B>;
+	periph-1d1-supply = <&L17B>;
+	periph-1d2-supply = <&L18B>;
+	periph-1e4-supply = <&BOB1>;
+	periph-1e6-supply = <&BOB2>;
+	periph-29b-supply = <&S1C_LEVEL>;
+	periph-2c1-supply = <&L1C>;
+	periph-2c2-supply = <&L2C>;
+	periph-2c3-supply = <&L3C>;
+	periph-2c4-supply = <&L4C>;
+	periph-59b-supply = <&S1F_LEVEL>;
+	periph-59e-supply = <&S2F_LEVEL>;
+	periph-5a1-supply = <&S3F_LEVEL>;
+	periph-5a7-supply = <&S5F_LEVEL>;
+	periph-5ad-supply = <&S7F>;
+	periph-5b0-supply = <&S8F>;
+	periph-5b3-supply = <&S9F>;
+	periph-5b6-supply = <&S10F_LEVEL>;
+	periph-5c1-supply = <&L1F_E1>;
+	periph-5c2-supply = <&L2F>;
+	periph-5c3-supply = <&L3F>;
+	periph-5c4-supply = <&L4F_LEVEL>;
+	periph-7aa-supply = <&S6H_LEVEL>;
+	periph-7ad-supply = <&S7H>;
+	periph-7b0-supply = <&S8H>;
+	periph-7c1-supply = <&L1H>;
+	periph-7c2-supply = <&L2H>;
+	periph-7c3-supply = <&L3H>;
+	periph-7c4-supply = <&L4H>;
+	periph-b9b-supply = <&S1L>;
+};
+
+&tlmm {
+	eusb3_reset_n: eusb3-reset-n-state {
+		pins = "gpio8";
+		function = "gpio";
+		drive-strength = <2>;
+		bias-disable;
+		output-low;
+	};
+};
+
+&qupv3_se5_i2c {
+	clock-frequency = <400000>;
+
+	status = "okay";
+
+	eusb3_repeater: redriver@43 {
+		compatible = "nxp,ptn3222";
+		reg = <0x43>;
+
+		vdd3v3-supply = <&L8B_E0>;
+		vdd1v8-supply = <&L15B_E0>;
+
+		reset-gpios = <&tlmm 8 GPIO_ACTIVE_LOW>;
+
+		pinctrl-0 = <&eusb3_reset_n>;
+		pinctrl-names = "default";
+
+		#phy-cells = <0>;
+	};
+};
+
+&usb_mp_hsphy0 {
+	phys = <&eusb3_repeater>;
+	status = "okay";
+};
+
+&usb_mp_hsphy1 {
+	status = "disabled";
+};
+
+&usb_mp_qmpphy0 {
+	status = "okay";
+};
+
+&usb_mp_qmpphy1 {
+	status = "disabled";
+};
+
+&usb_mp {
+	status = "okay";
+};
+
+&usb_mp_dwc3 {
+	phys = <&usb_mp_hsphy0>,
+	       <&usb_mp_qmpphy0>;
+	phy-names = "usb2-0",
+		    "usb3-0";
 };

@@ -78,7 +78,7 @@
 			dr_mode = "otg";
 			maximum-speed = "high-speed";
 			usb-role-switch;
-			imod-interval-ns = <160000>;
+			imod-interval-ns = <1000000>;
 		};
 	};
 
@@ -117,7 +117,7 @@
 	};
 
 	usb_audio_qmi_dev {
-		compatible = "qcom,usb-audio-qmi-dev";
+		compatible = "qcom,usb-audio-qmi-1ir-dev";
 		iommus = <&apps_smmu 0x22f 0x0>;
 		qcom,iommu-dma = "disabled";
 		qcom,usb-audio-stream-id = <0xf>;

@@ -208,7 +208,7 @@
 	};
 
 	cpufreq_hw: qcom,cpufreq-hw {
-		compatible = "qcom,cpufreq-hw-epss";
+		compatible = "qcom,cpufreq-epss-pdmem";
 		reg = <0x17d91000 0x1000>,
 		      <0x17d92000 0x1000>,
 		      <0x17d93000 0x1000>,
@@ -223,16 +223,13 @@
 			    "pdmem-domain2";
 		clocks = <&rpmhcc RPMH_CXO_CLK>, <&gcc GCC_GPLL0>;
 		clock-names = "xo", "alternate";
-		qcom,lut-row-size = <4>;
-		qcom,skip-enable-check;
-		qcom,perf-lock-support;
 		interrupts = <GIC_SPI 30 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 31 IRQ_TYPE_LEVEL_HIGH>,
 			     <GIC_SPI 19 IRQ_TYPE_LEVEL_HIGH>;
 		interrupt-names = "dcvsh0_int",
 				  "dcvsh1_int",
 				  "dcvsh2_int";
-		#freq-domain-cells = <2>;
+		#freq-domain-cells = <1>;
 	};
 
 	qcom,cpufreq-hw-debug {

@@ -1,0 +1,33 @@
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
+%YAML 1.2
+---
+$id: http://devicetree.org/schemas/hwmon/qcom,batt-telemetry.yaml#
+$schema: http://devicetree.org/meta-schemas/core.yaml#
+
+title: Qualcomm Technologies, Inc. Battery Telemetry Glink Device
+
+maintainers:
+  - Raj Aryan <raryan@qti.qualcomm.com>
+
+description: |
+  This binding describes the Qualcomm Technologies, Inc. battery telemetry
+  device. The QTI battery telemetry driver starts/stops battery voltage and
+  current sample capture and fetches the captured samples from the firmware
+  running on a remote subsystem (e.g. ADSP) over PMIC Glink.
+
+properties:
+  compatible:
+    const: qcom,batt-telemetry
+
+required:
+  - compatible
+
+additionalProperties: false
+
+examples:
+  - |
+    pmic_glink {
+      batt_telemetry {
+        compatible = "qcom,batt-telemetry";
+      };
+    };

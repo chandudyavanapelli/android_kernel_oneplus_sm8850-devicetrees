@@ -11,8 +11,8 @@
 
 / {
        model = "Qualcomm Technologies, Inc. Malabar MTP 4GB DDR";
-       compatible = "qcom,malabar-mtp", "qcom,malabar", "qcom,mtp";
-       qcom,msm-id = <733 0x10000>;
+       compatible = "qcom,malabar-mtp", "qcom,malabar", "qcom,mtp", "qcom,malabar-qmb";
+       qcom,msm-id = <733 0x10000>, <800 0x10000>;
        qcom,board-id = <0x10008 0x600>;
 };
 

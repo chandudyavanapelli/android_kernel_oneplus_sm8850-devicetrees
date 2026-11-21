@@ -13,9 +13,7 @@
 	qcom,ipa-ulso-wa;
 
 	/delete-property/ qcom,mhi-event-ring-id-limits;
-	/delete-property/ qcom,register-collection-on-crash;
-	/delete-property/ qcom,testbus-collection-on-crash;
-	/delete-property/ qcom,non-tn-collection-on-crash;
+	/delete-property/ qcom,ipa-uc-holb-monitor;
 
 	qcom,ipa-gen-rx-cmn-page-pool-sz-factor = <3>;
 	qcom,ipa-gen-rx-cmn-temp-pool-sz-factor = <1>;
@@ -68,10 +66,12 @@
 	qcom,ipa-dma-addr-pool = <0x20000000 0x20000000>;
 	memory-region = <&ipa_smmu_ap_partition>;
 	qcom,ipa-q6-smem-size = <36864>;
+	qcom,iommu-dma = "fastmap";
 };
 
 &ipa_smmu_wlan {
 	/delete-property/ dma-coherent;
+	qcom,iommu-dma = "fastmap";
 };
 
 &ipa_smmu_uc {
@@ -79,6 +79,7 @@
 	qcom,ipa-dma-addr-pool = <0x20000000 0x20000000>;
 	memory-region = <&ipa_smmu_uc_partition>;
 	/delete-property/ dma-coherent;
+	qcom,iommu-dma = "fastmap";
 };
 
 &ipa_smmu_11ad {

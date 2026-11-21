@@ -540,7 +540,7 @@
 	qcom,clk-freq-out = <100000>;
 	fl7112:fl7112@3a {
 		status = "ok";
-		compatible = "qcom,fl7112-fs8822";
+		compatible = "parade,fl7112-fs8822";
 		reg = <0x3a>;
 		fl7112,reset-gpio = <&tlmm 40 0>;
 		fl7112,pwr-1v2 = <&tlmm 41 0>;

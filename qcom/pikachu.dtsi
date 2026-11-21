@@ -34,7 +34,7 @@
 	memory { device_type = "memory"; reg = <0 0 0 0>; };
 
 	chosen: chosen {
-		bootargs = "kpti=0 log_buf_len=256K swiotlb=0 loop.max_part=7 loglevel=6 swiotlb=0 kasan=off cgroup_disable=pressure cgroup.memory=nokmem,nosocket disable_dma32=on restrict_cma_redirect=false no-steal-acc android_arch_task_struct_size=512 sysctl.kernel.sched_pelt_multiplier=4 bootconfig printk.console_no_auto_verbose=1 rcupdate.rcu_expedited=1 rcu_nocbs=0-4 kernel.panic_on_rcu_stall=1 no-steal-acc ftrace_dump_on_oops can.stats_timer=0 fw_devlink.strict=1 service_locator.enable=1 firmware_class.path=/vendor/firmware_mnt/image,/vendor/firmware irqaffinity=0-1 cpufreq.default_governor=performance pci=pcie_bus_safe,noaer pcie_pme=nomsi";
+		bootargs = "kpti=0 log_buf_len=256K swiotlb=0 loop.max_part=7 loglevel=6 swiotlb=0 kasan=off cgroup_disable=pressure cgroup.memory=nokmem,nosocket disable_dma32=on restrict_cma_redirect=false no-steal-acc android_arch_task_struct_size=512 sysctl.kernel.sched_pelt_multiplier=4 bootconfig printk.console_no_auto_verbose=1 rcupdate.rcu_expedited=1 rcu_nocbs=0-4 kernel.panic_on_rcu_stall=1 no-steal-acc ftrace_dump_on_oops can.stats_timer=0 fw_devlink.strict=1 service_locator.enable=1 firmware_class.path=/vendor/firmware_mnt/image,/vendor/firmware irqaffinity=0-1 cpufreq.default_governor=performance pci=pcie_bus_safe,noaer pcie_pme=nomsi hibernate.compressor=lz4";
 	};
 
 	reserved_memory: reserved-memory {};
@@ -878,6 +878,11 @@
 		clock-frequency = <19200000>;
 	};
 
+	show_resume_irqs@0x17200000 {
+		compatible = "qcom,show-resume-irqs";
+		reg = <0x17200000 0x110000>;
+	};
+
 	cnss_ipa_wlan_iommu_group0: cnss_ipa_wlan_iommu_group0 {
 		qcom,iommu-msi-size = <0x1000>;
 		qcom,iommu-geometry = <0x98000000 0x18010000>;
@@ -1145,9 +1150,7 @@
 					<  691200 250000 >,
 					<  960000 350000 >,
 					< 1113600 533000 >,
-					< 1497600 600000 >,
 					< 1747200 600000 >,
-					< 1843200 710670 >,
 					< 2016000 710670 >;
 				qcom,sampling-enabled;
 			};
@@ -1576,6 +1579,7 @@
 		qcom,bam-ee = <0>;
 		qcom,smmu-s1-enable;
 		qcom,no-clock-support;
+		qcom,no-clk-gating;
 		interconnect-names = "data_path";
 		interconnects = <&system_noc MASTER_CRYPTO &mc_virt SLAVE_EBI1>;
 		iommus = <&apps_smmu 0x0080 0x0>,
@@ -1657,6 +1661,7 @@
 		interrupts = <GIC_SPI 266 IRQ_TYPE_LEVEL_HIGH>;
 		cap-based-alloc-and-pwr-collapse;
 		qcom,sct-initialized;
+		ranges;
 
 		llcc-perfmon {
 			compatible = "qcom,llcc-perfmon";
@@ -2431,7 +2436,8 @@
 
 	gic-interrupt-router {
 		compatible = "qcom,gic-intr-routing";
-		qcom,gic-class0-cpus = <&CPU0 &CPU1 &CPU2 &CPU3>;
+		qcom,gic-class0-cpus = <&CPU0 &CPU1>;
+		qcom,gic-class1-cpus = <&CPU2 &CPU3>;
 	};
 
 	cpu_pmu: cpu-pmu {
@@ -2454,6 +2460,38 @@
 
 	qcom_dcvs_prof: qcom-dcvs-prof {
 		max_masters = <4>;
+	};
+
+	qcom,pdr_monitor {
+		compatible = "qcom,pdr-monitor";
+
+		pd-adsp-audio {
+			service-name = "tms/servreg";
+			service-path = "msm/adsp/audio_pd";
+			qcom,smem-id = <684>;
+			qcom,smem-host = <2>;
+		};
+
+		pd-adsp-sensor {
+			service-name = "tms/servreg";
+			service-path = "msm/adsp/sensor_pd";
+			qcom,smem-id = <685>;
+			qcom,smem-host = <2>;
+		};
+
+		pd-adsp-xr {
+			service-name = "tms/servreg";
+			service-path = "msm/adsp/xr_pd";
+			qcom,smem-id = <687>;
+			qcom,smem-host = <2>;
+		};
+
+		pd-adsp-ois {
+			service-name = "tms/servreg";
+			service-path = "msm/adsp/ois_pd";
+			qcom,smem-id = <686>;
+			qcom,smem-host = <2>;
+		};
 	};
 
 	adsp_pas: remoteproc-adsp@33C00000 {
@@ -2817,9 +2855,9 @@
 	};
 
 	ramoops_mem: ramoops_region {
-		alloc-ranges = <0x1 0x00000000 0xfffffffe 0xffffffff>;
+		alloc-ranges = <0x0 0x80000000 0x1 0x80000000>;
 		size = <0x0 0x200000>;
-		no-map;
+		reusable;
 	};
 
 	kinfo_mem: debug_kinfo_region {

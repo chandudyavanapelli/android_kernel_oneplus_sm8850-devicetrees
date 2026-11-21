@@ -2,3 +2,6 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+
+#include "x1e80100-pmic-overlay.dtsi"
+#include "x1p42100-thermal-overlay.dtsi"

@@ -13,8 +13,14 @@
 #include "waipio-ipa.dtsi"
 
 / {
-	model = "Qualcomm Technologies, Inc. Waipio";
-	compatible = "qcom,waipio";
-	qcom,msm-id = <457 0x10000>;
-	qcom,board-id = <0 0>;
+	model = "Qualcomm Technologies, Inc. Waipio SoC";
+	compatible = "qcom,waipio", "qcom,waipio-mtp", "qcom,mtp",
+					"qcom,waipio-atp", "qcom,atp",
+					"qcom,waipio-cdp", "qcom,cdp",
+					"qcom,waipio-qrd", "qcom,qrd";
+	qcom,msm-id = <457 0x10000>, <457 0x20000>, <552 0x10000>;
+	qcom,board-id = <0 0>, <0x10008 0>, <0x03010008 0x03>, <33 0>,
+					<0x10021 0>, <1 0>, <0x10001 0>, <0x02010001 0x2>,
+					<0x04010008 0x04>, <0x01010001 0x1>, <0x01010008 0x1>,
+					<8 0>, <11 0>, <0x1000b 0>, <0x10008 5>, <0x2000b 0>;
 };

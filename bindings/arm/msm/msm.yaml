@@ -173,6 +173,36 @@ properties:
               - qcom,rumi
           - const: qcom,waipiop
 
+      - description: Qualcomm Technologies, Inc. Diwali
+        items:
+          - enum:
+              - qcom,diwali-atp
+              - qcom,atp
+              - qcom,diwali-cdp
+              - qcom,cdp
+              - qcom,diwali-mtp
+              - qcom,mtp
+              - qcom,diwali-qrd
+              - qcom,qrd
+              - qcom,diwali-rumi
+              - qcom,rumi
+          - const: qcom,diwali
+
+      - description: Qualcomm Technologies, Inc. Diwalip
+        items:
+          - enum:
+              - qcom,diwalip-atp
+              - qcom,atp
+              - qcom,diwalip-cdp
+              - qcom,cdp
+              - qcom,diwalip-mtp
+              - qcom,mtp
+              - qcom,diwalip-qrd
+              - qcom,qrd
+              - qcom,diwalip-rumi
+              - qcom,rumi
+          - const: qcom,diwalip
+
       - description: Qualcomm Technologies, Inc. Chora
         items:
           - enum:
@@ -268,6 +298,10 @@ properties:
               - qcom,malabarp-rcm
               - qcom,rcm
           - const: qcom,malabarp
+
+      - description: Qualcomm Technologies, Inc. Malabar QMB
+        items:
+          - const: qcom,malabar-qmb
 
       - description: Qualcomm Technologies, Inc. PARROT
         items:

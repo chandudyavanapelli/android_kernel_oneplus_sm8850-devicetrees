@@ -14,3 +14,18 @@
 	qcom,msm-id = <532 0x10000>, <532 0x20000>;
 	qcom,board-id = <0x10025 0x0>;
 };
+
+/*
+ * sa8255p qcvirtio AGL GVM: QUPv3_0 (label 0x7F) and QUPv3_2 (label 0x81)
+ * are reassigned to PVM. Remove the Gunyah shared-iomem mappings so these
+ * QUPv3 MMIO ranges are no longer accessible in the AGL GVM. BT is instead
+ * delivered via the qcvirtio-bt virtio-mmio ring (@47 in
+ * lemans-gh-vm-lv-qcvirtio.dtsi).
+ */
+&qupv3_0_shared_iomem {
+	status = "disabled";
+};
+
+&qupv3_2_shared_iomem {
+	status = "disabled";
+};

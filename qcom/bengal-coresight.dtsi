@@ -1045,26 +1045,6 @@
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
-		out-ports {
-			port@0 {
-				reg = <0>;
-				funnel_turing_out_tpda5: endpoint {
-					remote-endpoint =
-					<&tpda5_in_funnel_turing>;
-					source = <&tpdm_turing>;
-				};
-			};
-
-			port@1 {
-				reg = <1>;
-				funnel_turing_out_funnel_qatb: endpoint {
-					remote-endpoint =
-					<&funnel_qatb_in_funnel_turing>;
-					source = <&turing_etm0>;
-				};
-			};
-		};
-
 		in-ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -1085,6 +1065,52 @@
 				};
 			};
 
+		};
+
+		out-ports {
+			port {
+				funnel_turing_out_replicator_turing: endpoint {
+					remote-endpoint =
+					<&replicator_turing_in_funnel_turing>;
+				};
+			};
+		};
+	};
+
+	turing_replicator {
+		compatible = "arm,coresight-static-replicator";
+		device-name = "replicator_turing";
+
+		in-ports {
+			port {
+				replicator_turing_in_funnel_turing: endpoint {
+					remote-endpoint =
+					<&funnel_turing_out_replicator_turing>;
+				};
+			};
+		};
+
+		out-ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+				funnel_turing_out_tpda5: endpoint {
+					remote-endpoint =
+					<&tpda5_in_funnel_turing>;
+					filter-source = <&tpdm_turing>;
+				};
+			};
+
+			port@1 {
+				reg = <1>;
+				funnel_turing_out_funnel_qatb: endpoint {
+					remote-endpoint =
+					<&funnel_qatb_in_funnel_turing>;
+					filter-source = <&turing_etm0>;
+				};
+			};
 		};
 	};
 
@@ -1535,7 +1561,6 @@
 		qcom,sw-usb;
 		arm,buffer-size = <0x400000>;
 		arm,scatter-gather;
-		dma-coherent;
 
 		coresight-ctis = <&cti0>;
 		coresight-csr = <&csr>;

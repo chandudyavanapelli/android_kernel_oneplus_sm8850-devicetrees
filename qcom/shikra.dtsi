@@ -25,7 +25,7 @@
 	memory { device_type = "memory"; reg = <0 0 0 0>; };
 
 	chosen: chosen {
-		bootargs = "android_arch_task_struct_size=512 pcie_ports=compat kasan=off irqaffinity=0-1 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 rcupdate.rcu_expedited=1 rcu_nocbs=0-4 cgroup_disable=pressure cgroup.memory=nokmem,nosocket page_poison=on restrict_cma_redirect=false nokaslr kpti=0 log_buf_len=256K swiotlb=0 loop.max_part=7 loglevel=8 bootconfig sysctl.kernel.sched_pelt_multiplier=4 no-steal-acc fw_devlink.strict=1";
+		bootargs = "android_arch_task_struct_size=512 pcie_ports=compat kasan=off irqaffinity=0-1 cpufreq.default_governor=performance printk.console_no_auto_verbose=1 rcupdate.rcu_expedited=1 rcu_nocbs=0-4 cgroup_disable=pressure cgroup.memory=nokmem,nosocket page_poison=on restrict_cma_redirect=false kpti=0 log_buf_len=256K swiotlb=0 loop.max_part=7 loglevel=8 bootconfig sysctl.kernel.sched_pelt_multiplier=4 no-steal-acc fw_devlink.strict=1";
 
 	};
 
@@ -2168,11 +2168,10 @@
 				qcom,sampling-enabled;
 				qcom,cpufreq-memfreq-tbl =
 					<  768000  300000 >,
-					< 1017600  547000 >,
-					< 1094400  768000 >,
-					< 1497600 1017000 >,
-					< 1612800 1555000 >,
-					< 1804800 1804000 >;
+					< 1094400  547000 >,
+					< 1497600  768000 >,
+					< 1612800 1017000 >,
+					< 1804800 1555000 >;
 			};
 
 			gold {
@@ -2782,7 +2781,17 @@
 		tuivm {
 			qcom,label = <0x08>;
 			qcom,vmid = <45>;
-			tlmm-vm-gpio-list = <&tlmm 12 0 &tlmm 13 0>;
+			tlmm-vm-gpio-list = <
+			/* Touch gpio pins */
+				&tlmm 12 0
+				&tlmm 13 0
+				&tlmm 76 0
+				&tlmm 85 0
+			/* Display gpio pins */
+				&tlmm 3 0
+				&tlmm 86 0
+				&tlmm 91 0
+				&tlmm 151 0>;
 		};
 	};
 
@@ -3435,6 +3444,8 @@
 
 &i2c4 {
 	status = "ok";
+	qcom,touch-active = "goodix,gt928";
+	qcom,la-vm;
 	gt9xx-i2c@5d {
 		compatible = "goodix,gt928";
 		reg = <0x5d>;
@@ -3481,7 +3492,7 @@
 		qts,trusted-touch-mode = "vm_mode";
 		qts,touch-environment = "pvm";
 		qts,trusted-touch-type = "primary";
-		qts,trusted-touch-spi-irq = <267>;
+		qts,trusted-touch-spi-irq = <270>;
 		qts,trusted-touch-io-bases = <0x4a90000>;
 		qts,trusted-touch-io-sizes = <0x1000>;
 		qts,trusted-touch-vm-gpio-list = <&tlmm 12 0 &tlmm 13 0 &tlmm 76 0 &tlmm 85 0x2008>;
