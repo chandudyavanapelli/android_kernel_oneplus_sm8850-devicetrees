@@ -12,17 +12,14 @@
 	qcom,ipa-hw-ver = <22>; /* IPA core version = IPAv5.1 */
 	qcom,ipa-ulso-wa;
 
-	/delete-property/ qcom,entire-ipa-block-size;
-	/delete-property/ qcom,register-collection-on-crash;
-	/delete-property/ qcom,testbus-collection-on-crash;
-	/delete-property/ qcom,non-tn-collection-on-crash;
-
 	qcom,interconnect,num-cases = <5>;
 	qcom,interconnect,num-paths = <3>;
 	interconnects = <&aggre2_noc MASTER_IPA &gem_noc SLAVE_LLCC>,
 		<&mc_virt MASTER_LLCC &mc_virt SLAVE_EBI1>,
 		<&gem_noc MASTER_APPSS_PROC &config_noc SLAVE_IPA_CFG>;
 	interconnect-names = "ipa_to_llcc", "llcc_to_ebi1", "appss_to_ipa";
+
+	/delete-property/ qcom,ipa-uc-holb-monitor;
 
 	/* No vote */
 	qcom,no-vote =
@@ -66,11 +63,13 @@
 	qcom,ipa-dma-addr-pool = <0x20000000 0x20000000>;
 	memory-region = <&ipa_smmu_ap_partition>;
 	iommus = <&apps_smmu 0x5C0 0x0>;
-	qcom,ipa-q6-smem-size = <36864>;
+	qcom,iommu-dma = "fastmap";
+	qcom,ipa-q6-smem-size = <45056>;
 };
 
 &ipa_smmu_wlan {
 	iommus = <&apps_smmu 0x5C1 0x0>;
+	qcom,iommu-dma = "fastmap";
 };
 
 &ipa_smmu_uc {
@@ -78,8 +77,9 @@
 	qcom,ipa-dma-addr-pool = <0x20000000 0x20000000>;
 	memory-region = <&ipa_smmu_uc_partition>;
 	iommus = <&apps_smmu 0x5C2 0x0>;
+	qcom,iommu-dma = "fastmap";
 };
 
 &ipa_smmu_11ad {
-	iommus = <&apps_smmu 0x5C 0x0>;
+	iommus = <&apps_smmu 0x5C4 0x0>;
 };
