@@ -17,24 +17,24 @@
 		/* Power Domains */
 		power-domains = <&videocc VIDEO_CC_MVS0C_GDSC>,
 				<&videocc VIDEO_CC_MVS0_GDSC>;
-		power-domain-names = "venus", "vcodec0";
+		power-domain-names = "iris-ctl", "vcodec";
 
 		/* Clocks */
 
-		clocks = <&gcc GCC_VIDEO_AXI0_CLK>,
+		clocks = <&gcc GCC_VIDEO_AXI0C_CLK>,
 			 <&videocc VIDEO_CC_MVS0C_CLK>,
 			 <&videocc VIDEO_CC_MVS0_CLK>,
-			 <&gcc GCC_VIDEO_AXI0C_CLK>,
+			 <&gcc GCC_VIDEO_AXI0_CLK>,
 			 <&videocc VIDEO_CC_MVS0C_FREERUN_CLK>,
 			 <&videocc VIDEO_CC_MVS0_FREERUN_CLK>,
 			 <&videocc VIDEO_CC_MVS0_CLK_SRC>;
 
-		clock-names = "iface",
-			      "core",
-			      "vcodec0_core",
-			      "iface1",
-			      "core_freerun",
-			      "vcodec0_core_freerun",
+		clock-names = "gcc_video_axi0c_clk",
+			      "video_cc_mvs0c_clk",
+			      "video_cc_mvs0_clk",
+			      "gcc_video_axi0_clk",
+			      "video_cc_mvs0c_freerun_clk",
+			      "video_cc_mvs0_freerun_clk",
 			      "video_cc_mvs0_clk_src";
 
 		interconnects = <&hsc_noc MASTER_APPSS_PROC &config_noc SLAVE_VENUS_CFG>,
@@ -49,15 +49,15 @@
 		memory-region = <&video_mem>;
 
 				/* Clock Resets */
-		resets = <&gcc GCC_VIDEO_AXI0_CLK_ARES>,
-			 <&gcc GCC_VIDEO_AXI0C_CLK_ARES>,
+		resets = <&gcc GCC_VIDEO_AXI0C_CLK_ARES>,
+			 <&gcc GCC_VIDEO_AXI0_CLK_ARES>,
 			 <&videocc VIDEO_CC_MVS0C_FREERUN_CLK_ARES>,
 			 <&videocc VIDEO_CC_MVS0_FREERUN_CLK_ARES>;
 
-		reset-names ="bus0",
-			     "bus1",
-			     "core",
-			     "vcodec0_core";
+		reset-names ="video_axi0c_reset",
+			     "video_axi_reset",
+			     "video_mvs0c_reset",
+			     "video_mvs0_reset";
 		/* MMUs */
 		iommu_region_partition: iommu_region_partition {
 			/* These IOVA regions are unique per context bank */
@@ -87,7 +87,8 @@
 
 		non_secure_cb: non_secure_cb {
 			compatible = "qcom,vidc,cb-ns";
-			iommus = <&apps_smmu 0x1940 0x0000>;
+			iommus = <&apps_smmu 0x1940 0x0000>,
+				 <&apps_smmu 0x19E0 0x0000>;
 			memory-region = <&iommu_region_partition>;
 			qcom,iommu-faults = "non-fatal";
 			qcom,iova-best-fit;
@@ -97,7 +98,8 @@
 
 		secure_non_pixel_cb: secure_non_pixel_cb {
 			compatible = "qcom,vidc,cb-sec-non-pxl";
-			iommus = <&apps_smmu 0x1941 0x0000>;
+			iommus = <&apps_smmu 0x1941 0x0000>,
+				 <&apps_smmu 0x19E1 0x0000>;
 			memory-region = <&iommu_region_partition>;
 			qcom,iommu-faults = "non-fatal";
 			qcom,iova-best-fit;
