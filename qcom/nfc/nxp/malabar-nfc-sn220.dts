@@ -12,5 +12,5 @@
         model = "Qualcomm Technologies, Inc. Malabar SoC";
         compatible = "qcom,malabar", "qcom,malabar-qmb";
         qcom,msm-id = <733 0x10000>, <757 0x10000>, <800 0x10000>;
-        qcom,board-id = <0x20008 0>;
+        qcom,board-id = <0x20008 0>, <0x20008 1>;
 };
