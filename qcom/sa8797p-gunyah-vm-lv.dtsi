@@ -1451,6 +1451,11 @@
 		qcom,vmid = <53>;
 	};
 
+	qcom,mem-buf-msgq {
+		compatible = "qcom,mem-buf-msgq";
+		qcom,msgq-names = "trusted_vm";
+	};
+
 	qtee_shmbridge {
 		compatible = "qcom,tee-shared-memory-bridge";
 		qcom,custom-bridge-size = <512>;

@@ -448,7 +448,7 @@
 			config {
 				pins = "gpio41", "gpio42";
 				drive-strength = <2>;
-				bias-pull-down;
+				bias-bus-hold;
 			};
 		};
 	};

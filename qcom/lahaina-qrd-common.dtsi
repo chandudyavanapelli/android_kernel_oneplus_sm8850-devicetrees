@@ -189,6 +189,7 @@
 };
 
 &fsa4480 {
+	mode-switch;
 	port {
 		fsa4480_usbss_mux: endpoint {
 		remote-endpoint = <&ucsi_audio_mux>;

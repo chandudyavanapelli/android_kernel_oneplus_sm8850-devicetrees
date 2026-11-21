@@ -29,6 +29,7 @@ properties:
       - const: qcom,pm8550-bcl-v5
       - const: qcom,pmh0101-bcl-v5
       - const: qcom,pmiv010x-bcl-v5
+      - const: qcom,pmw6100-bcl-v5
 
   reg:
     maxItems: 1

@@ -3,6 +3,8 @@
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 
+#include <dt-bindings/dma/qcom-gpi.h>
+
 &soc {
 	/* QUPv3 SE Instances
 	 * Qup0 0: SE 0
@@ -248,7 +250,8 @@
 			compatible = "qcom,msm-geni-serial-hs";
 			reg = <0x884000 0x4000>;
 			reg-names = "se_phys";
-			interrupts = <GIC_SPI 496 IRQ_TYPE_LEVEL_HIGH>;
+			interrupts-extended = <&intc GIC_SPI 496 IRQ_TYPE_LEVEL_HIGH>,
+						<&tlmm 42 IRQ_TYPE_LEVEL_HIGH>;
 			clock-names = "se-clk";
 			clocks = <&gcc GCC_QUPV3_WRAP0_S1_CLK>;
 			interconnect-names = "qup-core",
@@ -258,9 +261,19 @@
 					<&gem_noc MASTER_APPSS_PROC &config_noc SLAVE_QUP_0>,
 					<&system_noc MASTER_QUP_0 &mc_virt SLAVE_EBI1>;
 			pinctrl-names = "default",
-					 "sleep";
-			pinctrl-0 = <&qup_uart1_tx_active>, <&qup_uart1_rx_active>;
-			pinctrl-1 = <&qup_uart1_sleep>;
+					"active",
+					 "sleep",
+					"shutdown";
+			pinctrl-0 = <&qup_uart1_sleep>;
+			pinctrl-1 = <&qup_uart1_tx_active>, <&qup_uart1_rx_active>;
+			pinctrl-2 = <&qup_uart1_sleep>;
+			pinctrl-3 = <&qup_uart1_sleep>;
+			dmas = <&gpi_dma0 0 1 QCOM_GPI_UART 64 0>,
+				 <&gpi_dma0 1 1 QCOM_GPI_UART 64 0>;
+			dma-names = "tx",
+				    "rx";
+			qcom,wakeup-byte = <0xFD>;
+			wakeup-source;
 			status = "disabled";
 		};
 

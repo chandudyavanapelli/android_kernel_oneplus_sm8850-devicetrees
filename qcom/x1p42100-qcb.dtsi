@@ -2,3 +2,118 @@
 /*
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
+
+#include "x1e80100-pmic-overlay.dtsi"
+#include "x1p42100-thermal-overlay.dtsi"
+
+&ucsi {
+	/* Left-side front port */
+	connector@0 {
+		compatible = "usb-c-connector";
+		reg = <0>;
+		power-role = "dual";
+		data-role = "dual";
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+
+				pmic_glink_port0_hs_in: endpoint {
+					remote-endpoint = <&usb_port0_hs_in>;
+				};
+			};
+		};
+	};
+
+	/* Left-side1 front port */
+	connector@1 {
+		compatible = "usb-c-connector";
+		reg = <1>;
+		power-role = "dual";
+		data-role = "dual";
+
+		ports {
+			#address-cells = <1>;
+			#size-cells = <0>;
+
+			port@0 {
+				reg = <0>;
+
+				pmic_glink_port1_hs_in: endpoint {
+					remote-endpoint = <&usb_port1_hs_in>;
+				};
+			};
+		};
+	};
+};
+
+&smb2360_0_eusb2_repeater {
+	vdd18-supply = <&L3D>;
+	vdd3-supply = <&L2B>;
+};
+
+&usb2_phy_0 {
+	phys = <&smb2360_0_eusb2_repeater>;
+	status = "okay";
+};
+
+&usb3_phy_0 {
+	status = "okay";
+};
+
+&usb0 {
+	status = "okay";
+	usb-role-switch;
+	pinctrl-names = "default";
+	pinctrl-0 = <&usb3phy_portselect_gpio_0>;
+	gpios = <&tlmm 121 0>;
+};
+
+&usb_port0_hs_in {
+	remote-endpoint = <&pmic_glink_port0_hs_in>;
+};
+
+&usb_port0_ssphy_out {
+	remote-endpoint = <&usb_port0_dwc3_ss>;
+};
+
+&usb_port0_dwc3_ss {
+	remote-endpoint = <&usb_port0_ssphy_out>;
+};
+
+&smb2360_1_eusb2_repeater {
+	vdd18-supply = <&L3D>;
+	vdd3-supply = <&L14B>;
+};
+
+&usb2_phy_1 {
+	phys = <&smb2360_1_eusb2_repeater>;
+	status = "okay";
+};
+
+&usb3_phy_1 {
+	status = "okay";
+};
+
+&usb1 {
+	status = "okay";
+	usb-role-switch;
+	pinctrl-names = "default";
+	pinctrl-0 = <&usb3phy_portselect_gpio_1>;
+	gpios = <&tlmm 123 0>;
+};
+
+&usb_port1_hs_in {
+	remote-endpoint = <&pmic_glink_port1_hs_in>;
+};
+
+&usb_port1_ssphy_out {
+	remote-endpoint = <&usb_port1_dwc3_ss>;
+};
+
+&usb_port1_dwc3_ss {
+	remote-endpoint = <&usb_port1_ssphy_out>;
+};

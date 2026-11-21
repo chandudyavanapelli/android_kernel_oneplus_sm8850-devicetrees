@@ -42,6 +42,7 @@ properties:
       - qcom,pikachu-rpmh-clk
       - qcom,seraph-rpmh-clk
       - qcom,glymur-rpmh-clk
+      - qcom,fillmore-rpmh-clk
 
   clocks:
     maxItems: 1

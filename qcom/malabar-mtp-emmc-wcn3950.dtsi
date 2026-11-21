@@ -1,0 +1,25 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include "malabar-mtp.dtsi"
+#include "malabar-pmiv010x.dtsi"
+
+&sdhc_1 {
+	status = "ok";
+};
+
+&ufsphy_mem {
+	status = "disabled";
+};
+
+&ufshc_mem {
+	status = "disabled";
+};
+
+&L5E {
+	regulator-min-microvolt = <2952000>;
+	regulator-max-microvolt = <3544000>;
+	qcom,init-voltage = <2952000>;
+};

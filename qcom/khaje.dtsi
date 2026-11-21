@@ -2285,25 +2285,6 @@
 		clocks = <&rpmcc RPM_SMD_QDSS_CLK>;
 		clock-names = "apb_pclk";
 
-		out-ports {
-			port@0 {
-				reg = <0>;
-				funnel_turing_out_funnel_qatb: endpoint {
-					remote-endpoint =
-					<&funnel_qatb_in_funnel_turing>;
-					source = <&turing_etm0>;
-				};
-			};
-
-			port@1 {
-				reg = <1>;
-				funnel_turing_out_tpda5: endpoint {
-					remote-endpoint =
-					<&tpda5_in_funnel_turing>;
-				};
-			};
-		};
-
 		in-ports {
 			#address-cells = <1>;
 			#size-cells = <0>;
@@ -2332,6 +2313,15 @@
 					slave-mode;
 					remote-endpoint =
 					<&turing_etm0_out_funnel_turing>;
+				};
+			};
+		};
+
+		out-ports {
+			port {
+				funnel_turing_out_replicator_turing: endpoint {
+					remote-endpoint =
+					<&replicator_turing_in_funnel_turing>;
 				};
 			};
 		};
@@ -2754,3 +2744,6 @@
 	};
 };
 
+&funnel_turing_out_funnel_qatb {
+	/delete-property/ filter-source;
+};

@@ -6,8 +6,107 @@
 #include "lemans-gh-vm-la-qam-ridesx.dts"
 #include "prime-board-id.dtsi"
 
+/* QUPv3 SE17 (uart17) and QUPv3 SE3/SE4 (uart3) are reassigned to the PVM
+ * for this board. BT is delivered via the qcvirtio-bt virtio-mmio ring,
+ * so drop the UART passthrough that lemans-gh-vm-la.dtsi otherwise grants.
+ */
+&{/aliases} {
+	/delete-property/ hsuart0;
+	/delete-property/ hsuart1;
+};
+
+&soc {
+	/delete-node/ ptp_virtual;
+	/delete-node/ qcom,ipcc@421000;
+	/delete-node/ qcom,ipcc@461000;
+	/delete-node/ ipcc-self-ping-apss_cl0;
+	/delete-node/ ipcc-self-ping-apss_cl0_ack;
+	/delete-node/ ipcc-self-ping-adsp_cl0;
+	/delete-node/ ipcc-self-ping-adsp_cl0_ack;
+	/delete-node/ ipcc-self-ping-gpdsp0_cl0;
+	/delete-node/ ipcc-self-ping-gpdsp0_cl0_ack;
+	/delete-node/ ipcc-self-ping-gpdsp1_cl0;
+	/delete-node/ ipcc-self-ping-gpdsp1_cl0_ack;
+	/delete-node/ virtio-glink-cma@2e000000;
+	/delete-node/ syscon@0x1fd8000;
+	/delete-node/ syscon@0x1fd9000;
+	/delete-node/ syscon@0x1fdd000;
+	/delete-node/ syscon@0x1fdb000;
+	/delete-node/ syscon@0x1fdf000;
+	/delete-node/ hgsl_tcsr_sender0;
+	/delete-node/ hgsl_tcsr_sender1;
+	/delete-node/ hgsl_tcsr_receiver0;
+	/delete-node/ hgsl_tcsr_receiver1;
+	/delete-node/ qcom,hgsl@0x2c00000;
+};
+
+&vm_config {
+	/delete-property/ iomemory-ranges;
+	/delete-property/ gic-irq-ranges;
+
+	/* Pass through regions */
+	iomemory-ranges = <
+			/* QRNG region */
+			0x0 0x10dc000 0x0 0x10dc000 0x0 0x1000 0x0
+			/* IMEM region */
+			0x0 0x146D8000 0x0 0x146D8000 0x0 0x1000 0x0
+			/* MPM timer read only*/
+			0x0 0xc221000 0x0 0xc221000 0x0 0x1000 0x1
+			/* Board serial number region */
+			0x0 0x786000 0x0 0x786000 0x0 0x1000 0x1
+			/* PCIe0 region */
+			0x4 0x0 0x4 0x0 0x0 0x10000000 0x0
+			0x0 0x40000000 0x0 0x40000000 0x0 0x100000 0x0
+			0x0 0x40100000 0x0 0x40100000 0x0 0x1ff00000 0x0
+			0x4 0x10100000 0x4 0x10100000 0x0 0x100000 0x0
+			/* EMAC1 CH4 region */
+			0x0 0x2300C000 0x0 0x2300C000 0x0 0x1000 0x0
+			/* USB2 region */
+			0x0 0xa400000 0x0 0xa400000 0x0 0x200000 0x0
+			0x0 0x88e7000 0x0 0x88e7000 0x0 0x1000 0x0
+			/* PDC region */
+			0x0 0xb220000 0x0 0xb220000 0x0 0x10000 0x0
+			>;
+
+	/* Keep IRQ passthrough only for remaining direct-MMIO guest devices. */
+	gic-irq-ranges = <
+		/* PCIe0 IRQs */
+		339 339
+		340 340
+		341 341
+		344 344
+		345 345
+		346 346
+		406 406
+		407 407
+		/* PCIe0 INTx */
+		466 466
+		467 467
+		470 470
+		471 471
+		/* EMAC1 CH4 GIC IRQ */
+		808 808
+		860 860
+		/* USB2 IRQs */
+		521 521
+		522 522
+		476 476
+		474 474
+		>;
+};
+
+/delete-node/ &qupv3_se17_4uart;
+/delete-node/ &qupv3_se3_4uart;
+
 &vm_config {
 	vdevices {
+		// qcvirtio-console (reuse legacy vconsole ring)
+		virtio-mmio@33 {
+			/delete-property/ patch;
+			generate = "/virtio-mmio";
+			vqs-num = <0x4>;
+		};
+
 		virtio-mmio@36 {
 			/delete-property/ patch;
 		};
@@ -66,7 +165,7 @@
 			};
 		};
 
-		// qcvirtio-console
+		// qcvirtio-rng
 		virtio-mmio@50 {
 			vdevice-type = "virtio-mmio";
 			generate = "/virtio-mmio";
@@ -225,3 +324,16 @@
 // qcvirtio-blk uses its own approach to specify and name partitions,
 // so this node is not needed anyway.
 /delete-node/ &rename_devices;
+
+&soc {
+	scmi {
+		compatible = "arm,scmi-virtio";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		status = "okay";
+
+		scmi_sens: protocol@15 {
+			reg = <0x15>;
+		};
+	};
+};

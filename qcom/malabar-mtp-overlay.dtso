@@ -12,8 +12,8 @@
 / {
 	model = "Qualcomm Technologies, Inc. Malabar MTP";
 	compatible = "qcom,malabar-mtp", "qcom,malabar", "qcom,malabarp-mtp", "qcom,malabarp",
-			"qcom,mtp";
-	qcom,msm-id = <733 0x10000>, <757 0x10000>;
+			"qcom,mtp", "qcom,malabar-qmb";
+	qcom,msm-id = <733 0x10000>, <757 0x10000>, <800 0x10000>;
 	qcom,board-id = <0x10008 0>;
 };
 

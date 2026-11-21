@@ -3,6 +3,8 @@
  * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
  */
 
+#include "x1e80100-pmic-overlay.dtsi"
+#include "x1p42100-thermal-overlay.dtsi"
 #include "x1-crd.dtsi"
 
 &soc {
@@ -19,4 +21,14 @@
 
 &pcie5 {
 	vreg-3p3-supply = <&wwan_fcpo>;
+};
+
+&pmc8380_g {
+	status = "disabled";
+};
+
+&spmi0_debug_bus {
+	pmc8380@6 {
+		status = "disabled";
+	};
 };

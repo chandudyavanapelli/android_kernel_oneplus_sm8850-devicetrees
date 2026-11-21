@@ -636,7 +636,6 @@
 		dmas = <&slimbam 3>, <&slimbam 4>;
 		dma-names = "rx", "tx";
 		iommus = <&apps_smmu 0x1826 0x0>;
-		qcom,wait_for_adsp_up;
 		#address-cells = <1>;
 		#size-cells = <0>;
 		status = "disabled";

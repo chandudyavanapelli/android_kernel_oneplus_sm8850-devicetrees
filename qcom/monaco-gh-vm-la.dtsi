@@ -27,8 +27,8 @@
 	};
 
 	chosen {
-		bootargs = "nokaslr log_buf_len=1M ufshcd-core.use_mcq_mode=n driver_async_probe=arm-scmi pcie_pme=nomsi fw_devlink.strict=1";
-		bootconfig = "androidboot.audio=ar","androidboot.dtbo_idx=6";
+		bootargs = "nokaslr log_buf_len=1M ufshcd-core.use_mcq_mode=n driver_async_probe=arm-scmi pcie_pme=nomsi fw_devlink.strict=1 maxcpus=4";
+		bootconfig = "androidboot.audio=ar","androidboot.dtbo_idx=7";
 	};
 
 	reserved_memory: reserved-memory {
@@ -96,11 +96,45 @@
 		#address-cells = <0x2>;
 		#size-cells = <0x0>;
 
+		cluster_0_opp_table: opp-table0 {
+			compatible = "operating-points-v2";
+			opp-shared;
+
+			opp-2361600000 {
+				opp-hz = /bits/ 64 <2361600000>;
+				opp-microvolt = <968000>;
+			};
+		};
+
+		cluster_1_opp_table: opp-table1 {
+			compatible = "operating-points-v2";
+			opp-shared;
+
+			opp-2112000000 {
+				opp-hz = /bits/ 64 <2112000000>;
+				opp-microvolt = <968000>;
+			};
+		};
+
+		cluster_2_opp_table: opp-table2 {
+			compatible = "operating-points-v2";
+			opp-shared;
+
+			opp-1958400000 {
+				opp-hz = /bits/ 64 <1958400000>;
+				opp-microvolt = <968000>;
+			};
+		};
+
+
 		CPU0: cpu@0 {
 			compatible = "arm,armv8";
 			reg = <0x0 0x0>;
 			device_type = "cpu";
 			enable-method = "psci";
+			capacity-dmips-mhz = <1024>;
+			dynamic-power-coefficient = <507>;
+			operating-points-v2 = <&cluster_0_opp_table>;
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
@@ -109,6 +143,9 @@
 			reg = <0x0 0x100>;
 			device_type = "cpu";
 			enable-method = "psci";
+			capacity-dmips-mhz = <1024>;
+			dynamic-power-coefficient = <507>;
+			operating-points-v2 = <&cluster_0_opp_table>;
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
@@ -117,6 +154,9 @@
 			reg = <0x0 0x200>;
 			device_type = "cpu";
 			enable-method = "psci";
+			capacity-dmips-mhz = <1024>;
+			dynamic-power-coefficient = <472>;
+			operating-points-v2 = <&cluster_1_opp_table>;
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
@@ -125,6 +165,9 @@
 			reg = <0x0 0x300>;
 			device_type = "cpu";
 			enable-method = "psci";
+			capacity-dmips-mhz = <1024>;
+			dynamic-power-coefficient = <472>;
+			operating-points-v2 = <&cluster_1_opp_table>;
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
@@ -133,6 +176,9 @@
 			reg = <0x0 0x10000>;
 			device_type = "cpu";
 			enable-method = "psci";
+			capacity-dmips-mhz = <350>;
+			dynamic-power-coefficient = <100>;
+			operating-points-v2 = <&cluster_2_opp_table>;
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
@@ -141,6 +187,9 @@
 			reg = <0x0 0x10100>;
 			device_type = "cpu";
 			enable-method = "psci";
+			capacity-dmips-mhz = <350>;
+			dynamic-power-coefficient = <100>;
+			operating-points-v2 = <&cluster_2_opp_table>;
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
@@ -149,6 +198,9 @@
 			reg = <0x0 0x10200>;
 			device_type = "cpu";
 			enable-method = "psci";
+			capacity-dmips-mhz = <350>;
+			dynamic-power-coefficient = <100>;
+			operating-points-v2 = <&cluster_2_opp_table>;
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
 
@@ -157,8 +209,12 @@
 			reg = <0x0 0x10300>;
 			device_type = "cpu";
 			enable-method = "psci";
+			capacity-dmips-mhz = <350>;
+			dynamic-power-coefficient = <100>;
+			operating-points-v2 = <&cluster_2_opp_table>;
 			cpu-idle-states = <&CPU_PWR_DWN>;
 		};
+
 
 		cpu-map {
 			cluster0 {
@@ -169,17 +225,19 @@
 				core1 {
 					cpu = <&CPU1>;
 				};
+			};
 
-				core2 {
+			cluster1 {
+				core0 {
 					cpu = <&CPU2>;
 				};
 
-				core3 {
+				core1 {
 					cpu = <&CPU3>;
 				};
 			};
 
-			cluster1 {
+			cluster2 {
 				core0 {
 					cpu = <&CPU4>;
 				};
@@ -197,6 +255,7 @@
 				};
 			};
 		};
+
 	};
 
 	idle-states {
@@ -329,7 +388,7 @@
 		vendor = "QTI";
 		image-name = "qcom,autoghgvm";
 		qcom,pasid = <0x0 0x2c>;
-		qcom,qtee-config-info = "p=3,16,57,77,78,7A,7C,8F,97,10C,159,199,47E,7F1;ta=keymaster64,widevine,pr_3_0,she_gvm,auto_test_a,auto_test_b,auto_test_c,auto_test_d,auto_test_e,auto_test_f,auto_test_g,auto_test_h,auto_test_i,auto_test_j,auto_test_k,auto_test_l,auto_test_m,auto_test_n,auto_test_o,auto_test_p,auto_test_320,auto_test_321,auto_test_322,auto_test_323,auto_test_324,apttestapp,apttestapp64,aptcryptotestapp,aptcryptotestapp64,smplserv,tzecotestapp,tzecotestappcbo1,smci_auto_test_1,smci_auto_test_2,smci_auto_test_3,smci_auto_test_4,smci_auto_test_5,smci_auto_test_6,smci_auto_test_7,smci_auto_test_8,smci_auto_test_9,smci_auto_test_10,smci_auto_test_11,smci_auto_test_12,smci_auto_test_13,smci_auto_test_14,smci_auto_test_15,smci_auto_test_16,smci_auto_test_init_crash,smci_auto_test_restartable,smci_auto_test_shutdown_crash,fsp_test_1,fsp_test_2,fsp_test_3,bintestapp64,tzecotestapp1,crypto_testapp,sst_testapp,autosst_testapp,auto_test_unpermitted,FD02C9DA-306C-48C7-A49C-BBD827AE86EF,5AF8C3E6-D9DF-446E-4FF2-D4D58E8CA49B,19CE19B9-FD73-4262-8553-E5CAC40C895A,C02CAC07-2639-4EF0-BC12-C4AF1FB3E276,15C6B6E4-D083-48E4-8744-4D90A8FF1EF2,CAD10542-34E4-452D-6156-E979AA6E61BC,23914957-C174-4EA6-54D1-DA820F77B4B0,5AF8C3E6-D9DF-446E-4FF2-C3C47D7B938A,CAD10542-34E4-452D-6156-E979AA6E6132,5AF8C3E6-D9DF-446E-4FF2-B2B36C6A8279,smplap32,smplap64,sbservice;";
+		qcom,qtee-config-info = "p=3,16,57,77,78,7A,7C,8F,97,10C,159,199,47E,7F1;ta=keymaster64,widevine,pr_3_0,she_gvm,auto_test_a,auto_test_b,auto_test_c,auto_test_d,auto_test_e,auto_test_f,auto_test_g,auto_test_h,auto_test_i,auto_test_j,auto_test_k,auto_test_l,auto_test_m,auto_test_n,auto_test_o,auto_test_p,auto_test_320,auto_test_321,auto_test_322,auto_test_323,auto_test_324,apttestapp,apttestapp64,aptcryptotestapp,aptcryptotestapp64,smplserv,tzecotestapp,tzecotestappcbo1,smci_auto_test_1,smci_auto_test_2,smci_auto_test_3,smci_auto_test_4,smci_auto_test_5,smci_auto_test_6,smci_auto_test_7,smci_auto_test_8,smci_auto_test_9,smci_auto_test_10,smci_auto_test_11,smci_auto_test_12,smci_auto_test_13,smci_auto_test_14,smci_auto_test_15,smci_auto_test_16,smci_auto_test_init_crash,smci_auto_test_restartable,smci_auto_test_shutdown_crash,fsp_test_1,fsp_test_2,fsp_test_3,bintestapp64,tzecotestapp1,crypto_testapp,sst_testapp,autosst_testapp,auto_test_unpermitted,FD02C9DA-306C-48C7-A49C-BBD827AE86EF,5AF8C3E6-D9DF-446E-4FF2-D4D58E8CA49B,19CE19B9-FD73-4262-8553-E5CAC40C895A,C02CAC07-2639-4EF0-BC12-C4AF1FB3E276,15C6B6E4-D083-48E4-8744-4D90A8FF1EF2,CAD10542-34E4-452D-6156-E979AA6E61BC,23914957-C174-4EA6-54D1-DA820F77B4B0,5AF8C3E6-D9DF-446E-4FF2-C3C47D7B938A,CAD10542-34E4-452D-6156-E979AA6E6132,5AF8C3E6-D9DF-446E-4FF2-B2B36C6A8279,smplap32,smplap64,wvqcomkeyprov,sbservice;";
 		qcom,secdomain-ids = <52 9 10>;
 		qcom,primary-vm-index = <0>;
 		vm-attrs = "guest-ram-dump", "vpm-virq", "allow-unprotected";
@@ -429,7 +488,7 @@
 		vcpus {
 			config = "/cpus";
 			affinity = "static";
-			affinity-map = <0x7 0x6 0x5 0x4 0x3 0x2 0x1 0x0>;
+			affinity-map = <0x3 0x2 0x1 0x0 0x7 0x6 0x5 0x4>;
 			sched-priority = <0>;       /* relative to PVM */
 			sched-timeslice = <1000>;   /* in ms */
 		};
@@ -1549,14 +1608,20 @@
 		};
 	};
 
-	emac1_hw: qcom,ethernet@2304C000 {
-		compatible = "qcom,stmmac-ethqos-emac1";
+	emac_iommu_region: emac-iommu-region {
+		iommu-addresses = <&emac0_hw 0x0 0x80000000>, <&emac0_hw 0xC0000000 0x40000000>;
+	};
+
+	emac0_hw: qcom,ethernet@2304C000 {
+		compatible = "qcom,stmmac-ethqos-emac-gy";
 		emac-core-version = <0x30010000>;
-		qcom,arm-smmu;
 		reg = <0x2304C000 0x1000>;
 		reg-names = "stmmaceth";
-		interrupts-extended = <&intc 0 870 4>, <&intc 0 941 4>;
+		dma-coherent;
+		interrupts-extended = <&intc 0 870 1>, <&intc 0 941 1>;
 		interrupt-names = "rx_ch0_intr", "tx_ch0_intr";
+		power-domains = <&scmi_power 10>;
+		power-domain-names = "gvm_power_mdio";
 		snps,tso;
 		snps,pbl = <32>;
 		mac-address = [00 55 7B B5 7D f7];
@@ -1565,12 +1630,10 @@
 		snps,mtl-rx-config = <&mtl_rx_setup>;
 		snps,mtl-tx-config = <&mtl_tx_setup>;
 		queue = <0>;
-		emac1_emb_smmu: emac1_emb_smmu {
-			compatible = "qcom,emac-thin-smmu-embedded";
-			iommus = <&apps_smmu 0x128 0x1>;
-			qcom,iommu-dma = "fastmap";
-			qcom,iommu-dma-addr-pool = <0x80000000 0x40000000>;
-		};
+		iommus = <&apps_smmu 0x128 0x1>;
+		qcom,iommu-geometry = <0x80000000 0x40000000>;
+		memory-region = <&emac_iommu_region>;
+		qcom,iommu-dma = "fastmap";
 	};
 
 	logbuf: qcom,logbuf-vendor-hooks {

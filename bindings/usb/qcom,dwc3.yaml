@@ -1,4 +1,4 @@
-# SPDX-License-Identifier: (GPL-2.0 OR BSD-2-Clause)
+# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 %YAML 1.2
 ---
 $id: http://devicetree.org/schemas/usb/qcom,dwc3.yaml#
@@ -108,6 +108,11 @@ properties:
       If present, disable USB3 pipe_clk requirement.
       Used when dwc3 operates without SSPHY and only
       HS/FS/LS modes are supported.
+    type: boolean
+
+  qcom,usb-dp-concurrent-mode-enable:
+    description:
+      Indicate that USB 3.0 and DP operate concurrently on the aiobar.
     type: boolean
 
   wakeup-source: true

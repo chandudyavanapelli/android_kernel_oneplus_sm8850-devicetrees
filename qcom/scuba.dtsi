@@ -213,6 +213,14 @@
 			compatible = "qcom,scm";
 			qcom,dload-mode = <&tcsr 0x13000>;
 		};
+
+		qcom_smcinvoke {
+			compatible = "qcom,smcinvoke";
+		};
+
+		qcom_si_core {
+			compatible = "qcom,si-core";
+		};
 	};
 
 	reserved_memory: reserved-memory {
@@ -1028,13 +1036,6 @@
 			<&rpmcc RPM_SMD_CE1_CLK>,
 			<&rpmcc RPM_SMD_CE1_CLK>,
 			<&rpmcc RPM_SMD_CE1_CLK>;
-	};
-
-	qcom_smcinvoke: smcinvoke@61800000 {
-		compatible = "qcom,smcinvoke";
-		qcom,support-legacy_smc;
-		reg = <0x61800000 0x2100000>;
-		reg-names = "secapp-region";
 	};
 
 	qcom_tzlog: tz-log@c125720 {

@@ -9,6 +9,7 @@
 #include "seca-vm-pinctrl.dtsi"
 #include "seca-vm-qupv3.dtsi"
 #include "seca-vm-ethernet.dtsi"
+#include "seca-vm-ufs.dtsi"
 
 / {
 	aliases {
@@ -20,6 +21,8 @@
 
 &vm_config {
 	iomemory-ranges = <
+		/* TSC Region */
+		0x0 0x1C81000 0x0 0x1C81000 0x0 0x1000 0x1
 		/* QUPv3 Tile 2 read-only region */
 		0x0 0x8C0000 0x0 0x8C0000 0x0 0x2000 0x1
 		/* QUPv3 SE14 region */
@@ -141,7 +144,7 @@
 	>;
 
 	vcpus {
-		affinity-map = <0x8 0x9 0xa 0xb 0xc 0xd>;
+		affinity-map = <0x4 0x5 0x8 0x9 0xa 0xb 0xc 0xd>;
 	};
 };
 
@@ -163,10 +166,12 @@
 
 &eusb2_phy2 {
 	status = "ok";
+	usb-repeater = <&eusb2_repeater_usb2>;
 };
 
 &eusb2_phy1 {
 	status = "ok";
+	usb-repeater = <&eusb2_repeater_usb1>;
 };
 
 &usb1 {
@@ -177,10 +182,33 @@
 	status = "ok";
 };
 
+&virtio_i2c_9 {
+	#address-cells = <1>;
+	#size-cells = <0>;
+
+	eusb2_repeater_usb1: eusb2_repeater@4f {
+		compatible = "nxp,eusb2-repeater";
+		reg = <0x4f>;
+		qcom,param-override-seq = <0x2 0x7
+					0x62 0x8>;
+	};
+
+	eusb2_repeater_usb2: eusb2_repeater@4b {
+		compatible = "nxp,eusb2-repeater";
+		reg = <0x4b>;
+		qcom,param-override-seq = <0x2 0x7
+					0x62 0x8>;
+	};
+};
+
 &pcie2 {
 	status = "ok";
 };
 
 &pcie3 {
+	status = "ok";
+};
+
+&ufshc2_mem {
 	status = "ok";
 };

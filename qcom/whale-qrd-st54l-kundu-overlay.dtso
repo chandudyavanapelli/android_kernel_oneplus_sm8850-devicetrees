@@ -1,0 +1,17 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+/dts-v1/;
+/plugin/;
+
+#include "whale-qrd-st54l-kundu.dtsi"
+
+/ {
+	model = "Qualcomm Technologies, Inc. Whale QRD + ST54L + Kundu";
+	compatible = "qcom,canoe-qrd", "qcom,canoe", "qcom,canoep-cdp", "qcom,canoep",
+			   "qcom,qrd";
+	qcom,msm-id = <722 0x30000>, <723 0x30000>;
+	qcom,board-id = <11 0>;
+};

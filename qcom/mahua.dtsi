@@ -8,6 +8,7 @@
 #include "glymur.dtsi"
 #include "mahua-dma-heaps.dtsi"
 #include "mahua-reserved-memory.dtsi"
+#include "mahua-thermal.dtsi"
 
 /delete-node/ &bwmon_llcc_cluster2;
 /delete-node/ &cluster2_pd;

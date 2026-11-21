@@ -34,6 +34,7 @@ CANOE_BOARDS += \
 		canoe-cdp-st54l-pandeiro-no-l3k-overlay.dtbo \
 		canoe-cdp-st54l-pandeiro-overlay.dtbo \
 		canoe-qrd-st54l-kundu-overlay.dtbo \
+		whale-qrd-st54l-kundu-overlay.dtbo \
 		canoe-qrd-st54l-pandeiro-overlay.dtbo \
 		canoe-rcm-kiwi-overlay.dtbo \
 		canoe-rcm-overlay.dtbo \
@@ -194,7 +195,7 @@ waipio-overlays-dtb-$(CONFIG_ARCH_WAIPIO) += $(WAIPIO_BOARDS) $(WAIPIO_BASE_DTB)
 
 dtb-y += $(waipio-dtb-y) $(waipio-overlays-dtb-y)
 
-MALABAR_BASE_DTB += malabar.dtb malabar-4gb.dtb
+MALABAR_BASE_DTB += malabar.dtb malabar-4gb.dtb malabar-qmb.dtb
 MALABAR_APQ_BASE_DTB += malabarp.dtb
 
 MALABAR_BOARDS += \
@@ -210,6 +211,9 @@ MALABAR_BOARDS += \
 		malabar-mtp-4gb-overlay.dtbo \
 		malabar-cdp-emmc-overlay.dtbo \
 		malabar-mtp-emmc-overlay.dtbo \
+		malabar-mtp-wcn3950-emmc-overlay.dtbo \
+		malabar-mtp-wcn3950-smb1355-emmc-overlay.dtbo \
+		malabar-rcm-emmc-overlay.dtbo \
 		malabar-cdp-ufs3-overlay.dtbo \
 		malabar-mtp-ufs3-overlay.dtbo \
 		malabar-qrd-ufs3-overlay.dtbo
@@ -671,7 +675,7 @@ vienna-dtb-$(CONFIG_ARCH_VIENNA) += \
 vienna-overlays-dtb-$(CONFIG_ARCH_VIENNA) += $(VIENNA_BOARDS) $(NOAPQ_VIENNA_BOARDS) $(VIENNA_BASE_DTB) $(VIENNA_APQ_BASE_DTB)
 dtb-y += $(vienna-dtb-y)
 
-X1P42100_BASE_DTB += x1p42100.dtb
+X1P42100_BASE_DTB += x1p42100.dtb x1p42100-canim.dtb
 
 X1P42100_BOARDS += \
 		   x1p42100-crd-overlay.dtbo \
@@ -679,9 +683,21 @@ X1P42100_BOARDS += \
 		   x1p42100-qcb-v1-overlay.dtbo \
 		   x1p42100-qcb-v2-overlay.dtbo \
 		   x1p42100-qcb-v3-overlay.dtbo \
+		   x1p42100-qcb-v4-overlay.dtbo \
 		   x1p42100-cdp-v1-overlay.dtbo \
 		   x1p42100-cdp-v2-overlay.dtbo \
-		   x1p42100-cdp-v3-overlay.dtbo
+		   x1p42100-cdp-v3-overlay.dtbo \
+		   x1p42100-cdp-v5-overlay.dtbo \
+		   x1p42100-canim-crd-overlay.dtbo \
+		   x1p42100-canim-crd-cologne-overlay.dtbo \
+		   x1p42100-canim-qcb-v1-overlay.dtbo \
+		   x1p42100-canim-qcb-v2-overlay.dtbo \
+		   x1p42100-canim-qcb-v3-overlay.dtbo \
+		   x1p42100-canim-qcb-v4-overlay.dtbo \
+		   x1p42100-canim-cdp-v1-overlay.dtbo \
+		   x1p42100-canim-cdp-v2-overlay.dtbo \
+		   x1p42100-canim-cdp-v3-overlay.dtbo \
+		   x1p42100-canim-cdp-v5-overlay.dtbo
 
 x1p42100-dtb-$(CONFIG_ARCH_X1P42100) += \
 	$(call add-overlays, $(X1P42100_BOARDS),$(X1P42100_BASE_DTB))
@@ -904,6 +920,9 @@ LEMANS_FLEX_SDP8_MULTI_GVM_BOARDS += sa8775p-sdp8-vm-la-mt-overlay.dtbo
 
 LEMANS_FLEX_SDP8_MULTI_GVM_BOARDS += sa8775p-sdp8-vm-lv-mt-overlay.dtbo
 
+PRIME_LEMANS_VM_MT_LA_BASE_DTB := prime-lemans-vm-mt-la.dtb
+PRIME_LEMANS_VM_MT_LA_BOARDS := prime-lemans-vm-mt-la-overlay.dtbo
+
 autogvm-dtb-$(CONFIG_ARCH_QTI_VM) += \
 	$(call add-overlays, $(LEMANS_LA_GVM_BOARDS),$(LEMANS_LA_GVM_BASE_DTB)) \
 	$(call add-overlays, $(LEMANS_LV_GVM_BOARDS),$(LEMANS_LV_GVM_BASE_DTB)) \
@@ -914,6 +933,7 @@ autogvm-dtb-$(CONFIG_ARCH_QTI_VM) += \
 	$(call add-overlays, $(LEMANS_FLEX_SDP8_LA_GVM_BOARDS),$(LEMANS_FLEX_SDP8_LA_GVM_BASE_DTB)) \
 	$(call add-overlays, $(LEMANS_SDP8_MULTI_GVM_BOARDS),$(LEMANS_SDP8_MULTI_GVM_BASE_DTB)) \
 	$(call add-overlays, $(LEMANS_FLEX_SDP8_MULTI_GVM_BOARDS),$(LEMANS_FLEX_SDP8_MULTI_GVM_BASE_DTB)) \
+	$(call add-overlays, $(PRIME_LEMANS_VM_MT_LA_BOARDS),$(PRIME_LEMANS_VM_MT_LA_BASE_DTB)) \
 	$(call add-overlays, $(LEMANS_MULTI_LA_GVM_BOARDS),$(LEMANS_MULTI_LA_GVM_BASE_DTB))
 
 autogvm-overlays-dtb-$(CONFIG_ARCH_QTI_VM) += \
@@ -926,6 +946,7 @@ autogvm-overlays-dtb-$(CONFIG_ARCH_QTI_VM) += \
 	$(LEMANS_FLEX_SDP8_LA_GVM_BOARDS) $(LEMANS_FLEX_SDP8_LA_GVM_BASE_DTB) \
 	$(LEMANS_SDP8_MULTI_GVM_BOARDS) $(LEMANS_SDP8_MULTI_GVM_BASE_DTB) \
 	$(LEMANS_FLEX_SDP8_MULTI_GVM_BOARDS) $(LEMANS_FLEX_SDP8_MULTI_GVM_BASE_DTB) \
+	$(PRIME_LEMANS_VM_MT_LA_BOARDS) $(PRIME_LEMANS_VM_MT_LA_BASE_DTB) \
 	$(LEMANS_MULTI_LA_GVM_BOARDS) $(LEMANS_MULTI_LA_GVM_BASE_DTB)
 
 dtb-y += $(autogvm-dtb-y)
@@ -1009,6 +1030,17 @@ autogvm-dtb-$(CONFIG_ARCH_QTI_VM) += \
 
 autogvm-overlays-dtb-$(CONFIG_ARCH_QTI_VM) += \
 	$(SECA_GH_LA_GVM_QAM_BOARDS) $(SECA_GH_LA_GVM_QAM_BASE_DTB)
+
+SECA_GH_LV_GVM_QAM_BASE_DTB += seca-gh-vm-lv-qam.dtb \
+			       seca-gh-vm-lv-qam-star.dtb
+
+SECA_GH_LV_GVM_QAM_BOARDS += seca-gh-vm-lv-qam-overlay.dtbo
+
+autogvm-dtb-$(CONFIG_ARCH_QTI_VM) += \
+	$(call add-overlays, $(SECA_GH_LV_GVM_QAM_BOARDS),$(SECA_GH_LV_GVM_QAM_BASE_DTB))
+
+autogvm-overlays-dtb-$(CONFIG_ARCH_QTI_VM) += \
+	$(SECA_GH_LV_GVM_QAM_BOARDS) $(SECA_GH_LV_GVM_QAM_BASE_DTB)
 
 dtb-y += $(autogvm-dtb-y) $(autogvm-overlays-dtb-y)
 

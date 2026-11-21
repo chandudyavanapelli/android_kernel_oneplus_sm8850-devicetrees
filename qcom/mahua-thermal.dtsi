@@ -1,0 +1,2667 @@
+// SPDX-License-Identifier: BSD-3-Clause
+/*
+ * Copyright (c) Qualcomm Technologies, Inc. and/or its subsidiaries.
+ */
+
+#include <dt-bindings/thermal/thermal_qti.h>
+
+/*
+ * GPU cooling cell — required for thermal mitigation
+ */
+&msm_gpu {
+	#cooling-cells = <2>;
+};
+
+/*
+ * Cooling Devices
+ * cpu0-cpu11 = 12 cores total (Mahua.AL)
+ * Cluster 0 / CPU.0.*: cpu0-cpu5
+ * Cluster 1 / CPU.1.*: cpu6-cpu11
+ */
+&soc {
+		tsens0: thermal-sensor@c22c000 {
+		compatible = "qcom,glymur-tsens", "qcom,tsens-v2";
+		reg = <0x0 0x0c22c000 0x0 0x1000>,
+			<0x0 0x0c222000 0x0 0x1000>;
+		interrupts = <GIC_SPI 771 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 861 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "uplow",
+			"critical";
+		#qcom,sensors = <13>;
+		#thermal-sensor-cells = <1>;
+	};
+
+	tsens1: thermal-sensor@c22d000 {
+		compatible = "qcom,glymur-tsens", "qcom,tsens-v2";
+		reg = <0x0 0x0c22d000 0x0 0x1000>,
+			<0x0 0x0c223000 0x0 0x1000>;
+
+		interrupts = <GIC_SPI 772 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 862 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "uplow",
+			"critical";
+		#qcom,sensors = <9>;
+		#thermal-sensor-cells = <1>;
+	};
+
+	tsens2: thermal-sensor@c22e000 {
+		compatible = "qcom,glymur-tsens", "qcom,tsens-v2";
+		reg = <0x0 0x0c22e000 0x0 0x1000>,
+			<0x0 0x0c224000 0x0 0x1000>;
+
+		interrupts = <GIC_SPI 773 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 863 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "uplow",
+			"critical";
+		#qcom,sensors = <13>;
+		#thermal-sensor-cells = <1>;
+	};
+
+	tsens3: thermal-sensor@c22f000 {
+		compatible = "qcom,glymur-tsens", "qcom,tsens-v2";
+		reg = <0x0 0x0c22f000 0x0 0x1000>,
+			<0x0 0x0c225000 0x0 0x1000>;
+
+		interrupts = <GIC_SPI 774 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 864 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "uplow",
+			"critical";
+		#qcom,sensors = <8>;
+		#thermal-sensor-cells = <1>;
+	};
+
+	tsens4: thermal-sensor@c230000 {
+		compatible = "qcom,glymur-tsens", "qcom,tsens-v2";
+		reg = <0x0 0x0c230000 0x0 0x1000>,
+			<0x0 0x0c226000 0x0 0x1000>;
+
+		interrupts = <GIC_SPI 791 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 865 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "uplow",
+			"critical";
+		#qcom,sensors = <11>;
+		#thermal-sensor-cells = <1>;
+	};
+
+	tsens5: thermal-sensor@c231000 {
+		compatible = "qcom,glymur-tsens", "qcom,tsens-v2";
+		reg = <0x0 0x0c231000 0x0 0x1000>,
+			<0x0 0x0c227000 0x0 0x1000>;
+
+		interrupts = <GIC_SPI 619 IRQ_TYPE_LEVEL_HIGH>,
+			<GIC_SPI 814 IRQ_TYPE_LEVEL_HIGH>;
+		interrupt-names = "uplow",
+			"critical";
+		#qcom,sensors = <15>;
+		#thermal-sensor-cells = <1>;
+	};
+
+	qcom,cpu-pause {
+		compatible = "qcom,thermal-pause";
+
+		/* --- Individual CPU pause cooling devices --- */
+		cpu0_pause: cpu0-pause {
+			qcom,cpus = <&cpu0>;
+			qcom,cdev-alias = "thermal-pause-1";
+			#cooling-cells = <2>;
+		};
+
+		cpu1_pause: cpu1-pause {
+			qcom,cpus = <&cpu1>;
+			qcom,cdev-alias = "thermal-pause-2";
+			#cooling-cells = <2>;
+		};
+
+		cpu2_pause: cpu2-pause {
+			qcom,cpus = <&cpu2>;
+			qcom,cdev-alias = "thermal-pause-4";
+			#cooling-cells = <2>;
+		};
+
+		cpu3_pause: cpu3-pause {
+			qcom,cpus = <&cpu3>;
+			qcom,cdev-alias = "thermal-pause-8";
+			#cooling-cells = <2>;
+		};
+
+		cpu4_pause: cpu4-pause {
+			qcom,cpus = <&cpu4>;
+			qcom,cdev-alias = "thermal-pause-10";
+			#cooling-cells = <2>;
+		};
+
+		cpu5_pause: cpu5-pause {
+			qcom,cpus = <&cpu5>;
+			qcom,cdev-alias = "thermal-pause-20";
+			#cooling-cells = <2>;
+		};
+
+		cpu6_pause: cpu6-pause {
+			qcom,cpus = <&cpu6>;
+			qcom,cdev-alias = "thermal-pause-40";
+			#cooling-cells = <2>;
+		};
+
+		cpu7_pause: cpu7-pause {
+			qcom,cpus = <&cpu7>;
+			qcom,cdev-alias = "thermal-pause-80";
+			#cooling-cells = <2>;
+		};
+
+		cpu8_pause: cpu8-pause {
+			qcom,cpus = <&cpu8>;
+			qcom,cdev-alias = "thermal-pause-100";
+			#cooling-cells = <2>;
+		};
+
+		cpu9_pause: cpu9-pause {
+			qcom,cpus = <&cpu9>;
+			qcom,cdev-alias = "thermal-pause-200";
+			#cooling-cells = <2>;
+		};
+
+		cpu10_pause: cpu10-pause {
+			qcom,cpus = <&cpu10>;
+			qcom,cdev-alias = "thermal-pause-400";
+			#cooling-cells = <2>;
+		};
+
+		cpu11_pause: cpu11-pause {
+			qcom,cpus = <&cpu11>;
+			qcom,cdev-alias = "thermal-pause-800";
+			#cooling-cells = <2>;
+		};
+
+		/* ---Cluster-level pause cooling devices --- */
+		/*
+		 * Cluster 0: cpu0-cpu5
+		 * CPU bit mask: 0x03F
+		 */
+
+		APC0_MX_CX_PAUSE: apc0-mx-cx-pause {
+			qcom,cpus = <&cpu0 &cpu1 &cpu2 &cpu3 &cpu4 &cpu5>;
+			qcom,cdev-alias = "thermal-pause-3F";
+			#cooling-cells = <2>;
+		};
+
+		/*
+		 * Cluster 1: cpu6-cpu11
+		 * CPU bit mask: 0xFC0
+		 */
+		APC1_MX_CX_PAUSE: apc1-mx-cx-pause {
+			qcom,cpus = <&cpu6 &cpu7 &cpu8 &cpu9 &cpu10 &cpu11>;
+			qcom,cdev-alias = "thermal-pause-FC0";
+			#cooling-cells = <2>;
+		};
+	};
+
+	/*
+	 * CPU Hotplug cooling devices (cpu0-cpu11)
+	 */
+	qcom,cpu-hotplug {
+		compatible = "qcom,cpu-hotplug";
+
+		cpu0_hotplug: cpu0-hotplug {
+			qcom,cpu = <&cpu0>;
+			qcom,cdev-alias = "cpu-hotplug0";
+			#cooling-cells = <2>;
+		};
+
+		cpu1_hotplug: cpu1-hotplug {
+			qcom,cpu = <&cpu1>;
+			qcom,cdev-alias = "cpu-hotplug1";
+			#cooling-cells = <2>;
+		};
+
+		cpu2_hotplug: cpu2-hotplug {
+			qcom,cpu = <&cpu2>;
+			qcom,cdev-alias = "cpu-hotplug2";
+			#cooling-cells = <2>;
+		};
+
+		cpu3_hotplug: cpu3-hotplug {
+			qcom,cpu = <&cpu3>;
+			qcom,cdev-alias = "cpu-hotplug3";
+			#cooling-cells = <2>;
+		};
+
+		cpu4_hotplug: cpu4-hotplug {
+			qcom,cpu = <&cpu4>;
+			qcom,cdev-alias = "cpu-hotplug4";
+			#cooling-cells = <2>;
+		};
+
+		cpu5_hotplug: cpu5-hotplug {
+			qcom,cpu = <&cpu5>;
+			qcom,cdev-alias = "cpu-hotplug5";
+			#cooling-cells = <2>;
+		};
+
+		cpu6_hotplug: cpu6-hotplug {
+			qcom,cpu = <&cpu6>;
+			qcom,cdev-alias = "cpu-hotplug6";
+			#cooling-cells = <2>;
+		};
+
+		cpu7_hotplug: cpu7-hotplug {
+			qcom,cpu = <&cpu7>;
+			qcom,cdev-alias = "cpu-hotplug7";
+			#cooling-cells = <2>;
+		};
+
+		cpu8_hotplug: cpu8-hotplug {
+			qcom,cpu = <&cpu8>;
+			qcom,cdev-alias = "cpu-hotplug8";
+			#cooling-cells = <2>;
+		};
+
+		cpu9_hotplug: cpu9-hotplug {
+			qcom,cpu = <&cpu9>;
+			qcom,cdev-alias = "cpu-hotplug9";
+			#cooling-cells = <2>;
+		};
+
+		cpu10_hotplug: cpu10-hotplug {
+			qcom,cpu = <&cpu10>;
+			qcom,cdev-alias = "cpu-hotplug10";
+			#cooling-cells = <2>;
+		};
+
+		cpu11_hotplug: cpu11-hotplug {
+			qcom,cpu = <&cpu11>;
+			qcom,cdev-alias = "cpu-hotplug11";
+			#cooling-cells = <2>;
+		};
+	};
+
+	/*
+	 * GPU devfreq cooling device
+	 */
+	qcom,devfreq-cdev {
+		compatible = "qcom,devfreq-cdev";
+		qcom,devfreq = <&msm_gpu>;
+	};
+
+	/*
+	 * CPUfreq cooling devices
+	 * Cluster0: cpu0-cpu5  (TSENS0 / CPU.0)
+	 * Cluster1: cpu6-cpu11 (TSENS2 / CPU.1)
+	 */
+	qcom,cpufreq-cdev {
+		compatible = "qcom,cpufreq-cdev";
+
+		cpu-cluster0 {
+			qcom,cpus = <&cpu0 &cpu1 &cpu2 &cpu3 &cpu4 &cpu5>;
+		};
+
+		cpu-cluster1 {
+			qcom,cpus = <&cpu6 &cpu7 &cpu8 &cpu9 &cpu10 &cpu11>;
+		};
+	};
+
+	/*
+	 * QMI TMD cooling devices (CDSP)
+	 */
+	qmi_tmd: qmi-tmd-devices {
+		compatible = "qcom,qmi-cooling-devices";
+
+		cdsp {
+			qcom,instance-id = <QMI_CDSP_INST_ID>;
+
+			cdsp_sw: cdsp {
+				qcom,qmi-dev-name = "cdsp_sw";
+				#cooling-cells = <2>;
+			};
+		};
+	};
+};
+
+/*
+ * Thermal Zones — Mahua.AL
+ * SW Channel → Controller/Port mapping:
+ *
+ * TSENS0 (13 sensors, ch 0-12):
+ *   ch0=AOSS.0  ch1-12=CPU.0.0.0~CPU.0.5.1
+ *
+ * TSENS1 (9 sensors, ch 13-21):
+ *   ch13=AOSS.1  ch14-15=CPULLC.0.0/1
+ *   ch16-18=QMX.0.0/1/2  ch19-20=DDR.0/1  ch21=VIDEO.0
+ *
+ * TSENS2 (13 sensors, ch 22-34):
+ *   ch22=AOSS.2  ch23-34=CPU.1.0.0~CPU.1.5.1
+ *
+ * TSENS3 (8 sensors, ch 35-42):
+ *   ch35=AOSS.3  ch36-37=CPULLC.1.0/1
+ *   ch38-42=QMX.1.0/1/2/3/4
+ *
+ * TSENS4 (11 sensors, ch 43-53):
+ *   ch43=AOSS.4  ch44-47=NSPHVX.0/1/2/3
+ *   ch48-51=NSPHMX.0/1/2/3  ch52-53=CAMERA.0/1
+ *
+ * TSENS5 (15 sensors, ch 54-68):
+ *   ch54=AOSS.5  ch55-63=GPU.0.0~GPU.2.2
+ *   ch64-68=GPUSS.0/1 are enabled - /2/3/4 Not enabled
+ */
+&thermal_zones {
+
+	/* ---- TSENS0: AOSS.0 (port 0) ---- */
+	aoss-0-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 0>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.0.0 (port 1) ---- */
+	cpu-0-0-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 1>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu000_emerg0: cpu000-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu000_emerg0_1: cpu000-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.0.1 (port 2) ---- */
+	cpu-0-0-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 2>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu001_emerg0: cpu001-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu001_emerg0_1: cpu001-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+	};
+
+	/* ---- TSENS0: CPU.0.1.0 (port 3) ---- */
+	cpu-0-1-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 3>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu010_emerg0: cpu010-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu010_emerg0_1: cpu010-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu010_cdev {
+				trip = <&cpu010_emerg0>;
+				cooling-device = <&cpu1_pause 0 1>;
+			};
+
+			cpu010_cdev1 {
+				trip = <&cpu010_emerg0_1>;
+				cooling-device = <&cpu1_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.1.1 (port 4) ---- */
+	cpu-0-1-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 4>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu011_emerg0: cpu011-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu011_emerg0_1: cpu011-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu011_cdev {
+				trip = <&cpu011_emerg0>;
+				cooling-device = <&cpu1_pause 0 1>;
+			};
+
+			cpu011_cdev1 {
+				trip = <&cpu011_emerg0_1>;
+				cooling-device = <&cpu1_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.2.0 (port 5) ---- */
+	cpu-0-2-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 5>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu020_emerg0: cpu020-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu020_emerg0_1: cpu020-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu020_cdev {
+				trip = <&cpu020_emerg0>;
+				cooling-device = <&cpu2_pause 0 1>;
+			};
+
+			cpu020_cdev1 {
+				trip = <&cpu020_emerg0_1>;
+				cooling-device = <&cpu2_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.2.1 (port 6) ---- */
+	cpu-0-2-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 6>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu021_emerg0: cpu021-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu021_emerg0_1: cpu021-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu021_cdev {
+				trip = <&cpu021_emerg0>;
+				cooling-device = <&cpu2_pause 0 1>;
+			};
+
+			cpu021_cdev1 {
+				trip = <&cpu021_emerg0_1>;
+				cooling-device = <&cpu2_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.3.0 (port 7) ---- */
+	cpu-0-3-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 7>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu030_emerg0: cpu030-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu030_emerg0_1: cpu030-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu030_cdev {
+				trip = <&cpu030_emerg0>;
+				cooling-device = <&cpu3_pause 0 1>;
+			};
+
+			cpu030_cdev1 {
+				trip = <&cpu030_emerg0_1>;
+				cooling-device = <&cpu3_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.3.1 (port 8) ---- */
+	cpu-0-3-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 8>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu031_emerg0: cpu031-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu031_emerg0_1: cpu031-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu031_cdev {
+				trip = <&cpu031_emerg0>;
+				cooling-device = <&cpu3_pause 0 1>;
+			};
+
+			cpu031_cdev1 {
+				trip = <&cpu031_emerg0_1>;
+				cooling-device = <&cpu3_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.4.0 (port 9) ---- */
+	cpu-0-4-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 9>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu040_emerg0: cpu040-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu040_emerg0_1: cpu040-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu040_cdev {
+				trip = <&cpu040_emerg0>;
+				cooling-device = <&cpu4_pause 0 1>;
+			};
+
+			cpu040_cdev1 {
+				trip = <&cpu040_emerg0_1>;
+				cooling-device = <&cpu4_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.4.1 (port 10) ---- */
+	cpu-0-4-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 10>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu041_emerg0: cpu041-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu041_emerg0_1: cpu041-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu041_cdev {
+				trip = <&cpu041_emerg0>;
+				cooling-device = <&cpu4_pause 0 1>;
+			};
+
+			cpu041_cdev1 {
+				trip = <&cpu041_emerg0_1>;
+				cooling-device = <&cpu4_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.5.0 (port 11) ---- */
+	cpu-0-5-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 11>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu050_emerg0: cpu050-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu050_emerg0_1: cpu050-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu050_cdev {
+				trip = <&cpu050_emerg0>;
+				cooling-device = <&cpu5_pause 0 1>;
+			};
+
+			cpu050_cdev1 {
+				trip = <&cpu050_emerg0_1>;
+				cooling-device = <&cpu5_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS0: CPU.0.5.1 (port 12) ---- */
+	cpu-0-5-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens0 12>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu051_emerg0: cpu051-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu051_emerg0_1: cpu051-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu051_cdev {
+				trip = <&cpu051_emerg0>;
+				cooling-device = <&cpu5_pause 0 1>;
+			};
+
+			cpu051_cdev1 {
+				trip = <&cpu051_emerg0_1>;
+				cooling-device = <&cpu5_hotplug 0 1>;
+			};
+		};
+	};
+
+	/*
+	 * TSENS1: 9 sensors (ports 0-8)
+	 * AOSS.1, CPULLC.0.0/1, QMX.0.0/1/2, DDR.0/1, VIDEO.0
+	 */
+
+	/* ---- TSENS1: AOSS.1 (port 0) ---- */
+	aoss-1-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 0>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS1: CPULLC.0.0 (port 1) ---- */
+	cpullc-0-0-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 1>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS1: CPULLC.0.1 (port 2) ---- */
+	cpullc-0-1-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 2>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS1: QMX.0.0 (port 3) ---- */
+	qmx-0-0-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 3>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS1: QMX.0.1 (port 4) ---- */
+	qmx-0-1-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 4>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS1: QMX.0.2 (port 5) ---- */
+	qmx-0-2-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 5>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS1: DDR.0 (port 6) ---- */
+	ddr-0-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 6>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			ddr_config0: ddr0-config {
+				temperature = <90000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS1: DDR.1 (port 7) ---- */
+	ddr-1-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 7>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			ddr_config1: ddr1-config {
+				temperature = <90000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS1: VIDEO.0 (port 8) ---- */
+	video-0-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens1 8>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/*
+	 * TSENS2: 13 sensors (ports 0-12)
+	 * AOSS.2, CPU.1.0.0~CPU.1.5.1 (cpu6-cpu11)
+	 */
+
+	/* ---- TSENS2: AOSS.2 (port 0) ---- */
+	aoss-2-thermal {
+		polling-delay-passive = <0>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 0>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.0.0 (port 1) → cpu6 ---- */
+	cpu-1-0-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 1>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu100_emerg0: cpu100-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu100_emerg0_1: cpu100-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu100_cdev {
+				trip = <&cpu100_emerg0>;
+				cooling-device = <&cpu6_pause 0 1>;
+			};
+
+			cpu100_cdev1 {
+				trip = <&cpu100_emerg0_1>;
+				cooling-device = <&cpu6_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.0.1 (port 2) → cpu6 ---- */
+	cpu-1-0-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 2>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu101_emerg0: cpu101-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu101_emerg0_1: cpu101-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu101_cdev {
+				trip = <&cpu101_emerg0>;
+				cooling-device = <&cpu6_pause 0 1>;
+			};
+
+			cpu101_cdev1 {
+				trip = <&cpu101_emerg0_1>;
+				cooling-device = <&cpu6_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.1.0 (port 3) → cpu7 ---- */
+	cpu-1-1-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 3>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu110_emerg0: cpu110-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu110_emerg0_1: cpu110-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu110_cdev {
+				trip = <&cpu110_emerg0>;
+				cooling-device = <&cpu7_pause 0 1>;
+			};
+
+			cpu110_cdev1 {
+				trip = <&cpu110_emerg0_1>;
+				cooling-device = <&cpu7_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.1.1 (port 4) → cpu7 ---- */
+	cpu-1-1-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 4>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu111_emerg0: cpu111-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu111_emerg0_1: cpu111-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu111_cdev {
+				trip = <&cpu111_emerg0>;
+				cooling-device = <&cpu7_pause 0 1>;
+			};
+
+			cpu111_cdev1 {
+				trip = <&cpu111_emerg0_1>;
+				cooling-device = <&cpu7_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.2.0 (port 5) → cpu8 ---- */
+	cpu-1-2-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 5>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu120_emerg0: cpu120-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu120_emerg0_1: cpu120-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu120_cdev {
+				trip = <&cpu120_emerg0>;
+				cooling-device = <&cpu8_pause 0 1>;
+			};
+
+			cpu120_cdev1 {
+				trip = <&cpu120_emerg0_1>;
+				cooling-device = <&cpu8_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.2.1 (port 6) → cpu8 ---- */
+	cpu-1-2-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 6>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu121_emerg0: cpu121-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu121_emerg0_1: cpu121-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu121_cdev {
+				trip = <&cpu121_emerg0>;
+				cooling-device = <&cpu8_pause 0 1>;
+			};
+
+			cpu121_cdev1 {
+				trip = <&cpu121_emerg0_1>;
+				cooling-device = <&cpu8_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.3.0 (port 7) → cpu9 ---- */
+	cpu-1-3-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 7>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu130_emerg0: cpu130-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu130_emerg0_1: cpu130-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu130_cdev {
+				trip = <&cpu130_emerg0>;
+				cooling-device = <&cpu9_pause 0 1>;
+			};
+
+			cpu130_cdev1 {
+				trip = <&cpu130_emerg0_1>;
+				cooling-device = <&cpu9_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.3.1 (port 8) → cpu9 ---- */
+	cpu-1-3-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 8>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu131_emerg0: cpu131-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu131_emerg0_1: cpu131-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu131_cdev {
+				trip = <&cpu131_emerg0>;
+				cooling-device = <&cpu9_pause 0 1>;
+			};
+
+			cpu131_cdev1 {
+				trip = <&cpu131_emerg0_1>;
+				cooling-device = <&cpu9_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.4.0 (port 9) → cpu10 ---- */
+	cpu-1-4-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 9>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu140_emerg0: cpu140-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu140_emerg0_1: cpu140-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu140_cdev {
+				trip = <&cpu140_emerg0>;
+				cooling-device = <&cpu10_pause 0 1>;
+			};
+
+			cpu140_cdev1 {
+				trip = <&cpu140_emerg0_1>;
+				cooling-device = <&cpu10_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.4.1 (port 10) → cpu10 ---- */
+	cpu-1-4-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 10>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu141_emerg0: cpu141-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu141_emerg0_1: cpu141-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu141_cdev {
+				trip = <&cpu141_emerg0>;
+				cooling-device = <&cpu10_pause 0 1>;
+			};
+
+			cpu141_cdev1 {
+				trip = <&cpu141_emerg0_1>;
+				cooling-device = <&cpu10_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.5.0 (port 11) → cpu11 ---- */
+	cpu-1-5-0-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 11>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu150_emerg0: cpu150-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu150_emerg0_1: cpu150-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu150_cdev {
+				trip = <&cpu150_emerg0>;
+				cooling-device = <&cpu11_pause 0 1>;
+			};
+
+			cpu150_cdev1 {
+				trip = <&cpu150_emerg0_1>;
+				cooling-device = <&cpu11_hotplug 0 1>;
+			};
+		};
+	};
+
+	/* ---- TSENS2: CPU.1.5.1 (port 12) → cpu11 ---- */
+	cpu-1-5-1-thermal {
+		polling-delay-passive = <250>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens2 12>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			cpu151_emerg0: cpu151-emerg0-cfg {
+				temperature = <108000>;
+				hysteresis = <8000>;
+				type = "passive";
+			};
+
+			cpu151_emerg0_1: cpu151-emerg0-1-cfg {
+				temperature = <110000>;
+				hysteresis = <10000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			cpu151_cdev {
+				trip = <&cpu151_emerg0>;
+				cooling-device = <&cpu11_pause 0 1>;
+			};
+
+			cpu151_cdev1 {
+				trip = <&cpu151_emerg0_1>;
+				cooling-device = <&cpu11_hotplug 0 1>;
+			};
+		};
+	};
+
+	/*
+	 * TSENS3: 8 sensors (ports 0-7)
+	 * AOSS.3, CPULLC.1.0/1, QMX.1.0/1/2/3/4
+	 */
+
+	aoss-3-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens3 0>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	cpullc-1-0-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens3 1>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	cpullc-1-1-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens3 2>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	qmx-1-0-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens3 3>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	qmx-1-1-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens3 4>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	qmx-1-2-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens3 5>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	qmx-1-3-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens3 6>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	qmx-1-4-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens3 7>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/*
+	 * TSENS4: 11 sensors (ports 0-10)
+	 * AOSS.4, NSPHVX.0-3, NSPHMX.0-3, CAMERA.0/1
+	 */
+
+	aoss-4-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 0>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	nsphvx-0-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 1>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			nsphvx_0_trip: nsphvx-0-trip {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	nsphvx-1-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 2>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			nsphvx_1_trip: nsphvx-1-trip {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	nsphvx-2-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 3>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			nsphvx_2_trip: nsphvx-2-trip {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	nsphvx-3-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 4>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			nsphvx_3_trip: nsphvx-3-trip {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	nsphmx-0-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 5>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			nsphmx_0_trip: nsphmx-0-trip {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	nsphmx-1-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 6>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			nsphmx_1_trip: nsphmx-1-trip {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	nsphmx-2-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 7>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			nsphmx_2_trip: nsphmx-2-trip {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	nsphmx-3-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 8>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			nsphmx_3_trip: nsphmx-3-trip {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS4: CAMERA.0 (port 9) ---- */
+	camera-0-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 9>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS4: CAMERA.1 (port 10) ---- */
+	camera-1-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens4 10>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/*
+	 * TSENS5: 15 sensors (ports 0-14)
+	 * AOSS.5, GPU.0.0~GPU.2.2 (9 sensors), GPUSS.0~GPUSS.4
+	 */
+
+	aoss-5-thermal {
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 0>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.0.0 (port 1) ---- */
+	gpu-0-0-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 1>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu00_tj_cfg: gpu00-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu00_cdev {
+				trip = <&gpu00_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.0.1 (port 2) ---- */
+	gpu-0-1-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 2>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu01_tj_cfg: gpu01-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu01_cdev {
+				trip = <&gpu01_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.0.2 (port 3) ---- */
+	gpu-0-2-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 3>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu02_tj_cfg: gpu02-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu02_cdev {
+				trip = <&gpu02_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.1.0 (port 4) ---- */
+	gpu-1-0-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 4>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu10_tj_cfg: gpu10-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu10_cdev {
+				trip = <&gpu10_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.1.1 (port 5) ---- */
+	gpu-1-1-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 5>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu11_tj_cfg: gpu11-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu11_cdev {
+				trip = <&gpu11_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.1.2 (port 6) ---- */
+	gpu-1-2-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 6>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu12_tj_cfg: gpu12-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu12_cdev {
+				trip = <&gpu12_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.2.0 (port 7) ---- */
+	gpu-2-0-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 7>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu20_tj_cfg: gpu20-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu20_cdev {
+				trip = <&gpu20_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.2.1 (port 8) ---- */
+	gpu-2-1-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 8>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu21_tj_cfg: gpu21-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu21_cdev {
+				trip = <&gpu21_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPU.2.2 (port 9) ---- */
+	gpu-2-2-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 9>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpu22_tj_cfg: gpu22-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpu22_cdev {
+				trip = <&gpu22_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPUSS.0 (port 10) ---- */
+	gpuss-0-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 10>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpuss0_tj_cfg: gpuss0-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpuss0_cdev {
+				trip = <&gpuss0_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+
+	/* ---- TSENS5: GPUSS.1 (port 11) ---- */
+	gpuss-1-thermal {
+		polling-delay-passive = <4>;
+		polling-delay = <0>;
+		thermal-sensors = <&tsens5 11>;
+		trips {
+			thermal-engine-config {
+				temperature = <135000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			thermal-hal-config {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			gpuss1_tj_cfg: gpuss1-tj-cfg {
+				temperature = <95000>;
+				hysteresis = <5000>;
+				type = "passive";
+			};
+
+			reset-mon-cfg {
+				temperature = <115000>;
+				hysteresis = <0>;
+				type = "hot";
+			};
+		};
+
+		cooling-maps {
+			gpuss1_cdev {
+				trip = <&gpuss1_tj_cfg>;
+				cooling-device = <&msm_gpu 0 THERMAL_NO_LIMIT>;
+			};
+		};
+	};
+};

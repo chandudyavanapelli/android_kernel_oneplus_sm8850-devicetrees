@@ -6,6 +6,13 @@
 #include "seraphp-qar-camera-audio.dtsi"
 #include "seraphp-pmslg5.dtsi"
 
+&reserved_memory {
+	lpai_display_region: lpai_display_region@ba200000 {
+		no-map;
+		reg = <0x0 0xba200000 0x0 0x4000000>;
+	};
+};
+
 &pm8011m {
 	status = "disabled";
 	/delete-node/ pm8011m_reset;
@@ -48,8 +55,23 @@
 		compatible = "ti,et-irled";
 		reg = <0x65>;
 	};
+
+	nxp_eusb2_repeater_se5: eusb2_repeater@4f {
+		compatible = "nxp,eusb2-repeater";
+		reg = <0x4f>;
+		vdd1v8-supply = <&pmar2230_l3>;
+		vdd3v3-supply = <&pmar2230_l14>;
+	};
 };
 
+&nxp_eusb2_repeater {
+	status = "disabled";
+};
+
+&eusb2_phy0 {
+	dummy-supply = <&nxp_eusb2_repeater_se5>;
+	usb-repeater = <&nxp_eusb2_repeater_se5>;
+};
 
 &slg5bv49293L {
 	ldo4-mv = <1800>;
@@ -75,6 +97,28 @@
 	tps6286: tps6286@40 {
 		compatible = "ti,tps6286";
 		reg = <0x40>;
+	};
+
+	slg4dc_left: slg4dcl@4 {
+		compatible = "renesas,slg4dc";
+		reg = <0x04>;
+		left;
+	};
+
+	slg4dc_right: slg4dcr@7 {
+		compatible = "renesas,slg4dc";
+		reg = <0x07>;
+	};
+
+	ina234b_left: ina234bl@48 {
+		compatible = "ti,ina234b";
+		reg = <0x48>;
+		left;
+	};
+
+	ina234b_right: ina234br@49 {
+		compatible = "ti,ina234b";
+		reg = <0x49>;
 	};
 };
 

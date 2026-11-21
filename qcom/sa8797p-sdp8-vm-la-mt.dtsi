@@ -68,7 +68,7 @@
 		interrupt-controller;
 		#interrupt-cells = <3>;
 		#mbox-cells = <2>;
-		status = "disabled";
+		status = "ok";
 	};
 
 	virtio_glink_cma: virtio-glink-cma@2e000000 {
@@ -117,6 +117,12 @@
 				mboxes = <&ipcc_mproc_apps_ns1 IPCC_MPROC_ADSP0 0>;
 				label = "adsp";
 				qcom,glink-label = "adsp";
+				qcom,qrtr {
+					qcom,glink-channels = "IPCRTR";
+					qcom,intents = <0x800  5
+							0x2000 3
+							0x4400 2>;
+				};
 			};
 
 			remoteproc_hpass1_glink: glink-edge5 {
@@ -125,6 +131,12 @@
 				mboxes = <&ipcc_mproc_apps_ns1 IPCC_MPROC_ADSP1 0>;
 				label = "adsp1";
 				qcom,glink-label = "adsp1";
+				qcom,qrtr {
+					qcom,glink-channels = "IPCRTR";
+					qcom,intents = <0x800  5
+							0x2000 3
+							0x4400 2>;
+				};
 			};
 
 			remoteproc_hpass2_glink: glink-edge6 {
@@ -133,6 +145,12 @@
 				mboxes = <&ipcc_mproc_apps_ns1 IPCC_MPROC_ADSP2 0>;
 				label = "adsp2";
 				qcom,glink-label = "adsp2";
+				qcom,qrtr {
+					qcom,glink-channels = "IPCRTR";
+					qcom,intents = <0x800  5
+							0x2000 3
+							0x4400 2>;
+				};
 			};
 		};
 	};
